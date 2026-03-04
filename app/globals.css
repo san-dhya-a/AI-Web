@@ -1,21 +1,62 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Acumin-Condensed";
+  src: url("/assets/fonts/Acumin-Condensed/AcuminProCond-BlackItalic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Acumin-Condensed";
+  src: url("/assets/fonts/Acumin-Condensed/AcuminProCond-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Acumin-Condensed";
+  src: url("/assets/fonts/Acumin-Condensed/AcuminProCond-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "acumin-pro";
+  src: url("/assets/fonts/acumin-pro/Acumin-BdItPro.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "ArialCustom";
+  src: url("/assets/fonts/Arial/Arial-bold.otf") format("opentype");
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --vibra-dark-green: #004415;
+  --vibra-bright-green: #268200;
+  --vibra-bg-gray: #f9f9f9;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-vibra-dark: var(--vibra-dark-green);
+  --color-vibra-bright: var(--vibra-bright-green);
+  --color-vibra-gray: var(--vibra-bg-gray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-acumin-condensed: "Acumin-Condensed", sans-serif;
+  --font-acumin-pro: "acumin-pro", sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 input,
