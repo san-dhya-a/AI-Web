@@ -6,9 +6,9 @@ const footerLinks = [
         title: "O Programa",
         links: [
             { label: "Como Funciona", href: "#" },
-            { label: "Regulamento", href: "#" },
-            { label: "Fale Conosco", href: "#" },
-            { label: "FAQ", href: "#" },
+            { label: "Regulamento", href: "/regulamento" },
+            { label: "Fale Conosco", href: "/fale-conosco" },
+            { label: "FAQ", href: "/faq" },
         ],
     },
     {

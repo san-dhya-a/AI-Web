@@ -4,10 +4,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label: string;
     error?: string;
     variant?: "default" | "line";
+    labelClassName?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-    ({ label, error, variant = "default", className = "", ...props }, ref) => {
+    ({ label, error, variant = "default", className = "", labelClassName = "", ...props }, ref) => {
         const baseInputStyles = "w-full focus:outline-none transition-colors text-base";
         const variantStyles = variant === "line"
             ? "bg-transparent border-b border-gray-300 focus:border-[#268200] py-2 px-0"
@@ -15,7 +16,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
         return (
             <div className="flex flex-col w-full">
-                <label className="text-sm font-medium text-gray-700 mb-1">{label}</label>
+                <label className={`text-sm font-medium text-gray-700 mb-1 ${labelClassName}`}>{label}</label>
                 <input
                     ref={ref}
                     className={`${baseInputStyles} ${variantStyles} ${error ? "border-red-500" : ""} ${className}`}

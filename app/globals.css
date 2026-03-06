@@ -1,35 +1,6 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Acumin-Condensed";
-  src: url("/assets/fonts/Acumin-Condensed/AcuminProCond-BlackItalic.otf") format("opentype");
-  font-weight: 900;
-  font-style: italic;
-}
 
-@font-face {
-  font-family: "Acumin-Condensed";
-  src: url("/assets/fonts/Acumin-Condensed/AcuminProCond-Semibold.otf") format("opentype");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Acumin-Condensed";
-  src: url("/assets/fonts/Acumin-Condensed/AcuminProCond-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "acumin-pro";
-  src: url("/assets/fonts/acumin-pro/Acumin-BdItPro.otf") format("opentype");
-}
-
-@font-face {
-  font-family: "ArialCustom";
-  src: url("/assets/fonts/Arial/Arial-bold.otf") format("opentype");
-}
 
 :root {
   --background: #ffffff;
@@ -47,8 +18,10 @@
   --color-vibra-gray: var(--vibra-bg-gray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-acumin-condensed: "Acumin-Condensed", sans-serif;
-  --font-acumin-pro: "acumin-pro", sans-serif;
+  --font-acumin-cond-regular: var(--font-acumin-cond-regular), sans-serif;
+  --font-acumin-cond-semibold: var(--font-acumin-cond-semibold), sans-serif;
+  --font-acumin-cond-black-italic: var(--font-acumin-cond-black-italic), sans-serif;
+  --font-acumin-bold-italic: var(--font-acumin-bold-italic), sans-serif;
 }
 
 body {

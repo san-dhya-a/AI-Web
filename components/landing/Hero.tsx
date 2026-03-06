@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { acuminCondBlackItalic, acuminBoldItalic } from "@/app/fonts";
 
 export default function Hero() {
     return (
-        <section className="relative bg-white overflow-hidden min-h-[380px]">
+        <section className={`relative bg-white overflow-hidden min-h-[380px] ${acuminCondBlackItalic.variable} ${acuminBoldItalic.variable}`}>
 
             {/* Right Banner Image — absolutely placed to fill viewport's right edge */}
             <div className="hidden lg:block absolute right-0 top-0 h-full w-[42%]">
@@ -34,16 +35,16 @@ export default function Hero() {
 
                     {/* Heading + Subtitle */}
                     <div className="flex flex-col gap-3 pb-6">
-                        <h1 className="text-[40px] xl:text-[52px] font-black italic tracking-tighter text-[#004415] leading-[0.88] uppercase">
-                            BORA GANHAR<br />
-                            <span className="text-[#268200]">AINDA MAIS?</span>
+                        <h1 className="font-acumin-cond-black-italic text-[40px] xl:text-[52px] tracking-tighter text-[#004415] leading-[0.88] uppercase">
+                            BORA GANHAR
+                            <span className="block text-[#268200]">AINDA MAIS?</span>
                         </h1>
 
                         <div className="space-y-1 mt-2">
-                            <p className="text-[#268200] font-bold text-base">
+                            <p className="font-acumin-bold-italic text-[#268200] text-base">
                                 Incentivo &amp; Relacionamento do jeito Vibra
                             </p>
-                            <p className="text-gray-500 text-sm">
+                            <p className="font-sans text-gray-500 text-sm">
                                 Tudo que você precisa em um único lugar.
                             </p>
                         </div>

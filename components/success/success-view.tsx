@@ -1,27 +1,43 @@
 import Link from "next/link";
+import React from "react";
+import { acuminCondBlackItalic, acuminProBold, acuminProRegular } from "@/app/fonts";
 
-export default function SuccessView() {
+interface SuccessViewProps {
+    topText: React.ReactNode;
+    bottomText: React.ReactNode;
+    subtitle?: string;
+    backHref?: string;
+}
+
+export default function SuccessView({
+    topText,
+    bottomText,
+    subtitle = "Pronto!",
+    backHref = "/",
+}: SuccessViewProps) {
     return (
-        <main className="flex-1 bg-white flex flex-col justify-start min-h-[50vh]">
-            <div className="max-w-5xl mx-auto px-6 py-12 md:py-20 w-full">
+        <main className="bg-white">
+            <div className="max-w-[1100px] mx-auto px-6 pt-2 pb-4 w-full">
                 {/* Main Success Messages */}
-                <div className="mb-12">
-                    <p className="font-bold text-[#148e1c] text-base mb-1 md:text-lg">
-                        Pronto!
+                <div className="mb-4 text-left">
+                    <p className={`font-bold text-[#148e1c] text-[14px] mb-1 ${acuminProBold.className}`}>
+                        {subtitle}
                     </p>
                     <h2
-                        className="text-[2.5rem] md:text-[3.5rem] font-extrabold italic tracking-tighter uppercase leading-[1.05] md:leading-[1]"
+                        className={`text-[42px] md:text-[50px] tracking-tighter uppercase leading-[1.05] md:leading-[0.95] ${acuminCondBlackItalic.className}`}
                     >
-                        <span className="text-[#004415]">A SUA CONTA FOI</span> <br />
-                        <span className="text-[#148e1c]">ATUALIZADA COM SUCESSO!</span>
+                        <span className="text-[#004415]">{topText}</span> <br />
+                        <span className="text-[#148e1c]">{bottomText}</span>
                     </h2>
                 </div>
 
                 {/* Action Button */}
-                <div className="mt-8">
-                    <Link href="/">
-                        <button className="flex items-center gap-2 bg-[#004415] text-white font-bold text-sm px-6 py-2.5 rounded-sm hover:opacity-90 transition-opacity">
-                            <span className="text-lg">←</span>
+                <div className="mt-4">
+                    <Link href={backHref}>
+                        <button className={`flex items-center gap-3 bg-[#004415] text-white font-bold text-[14px] px-7 py-2.5 rounded-sm hover:bg-[#003310] transition-colors ${acuminProBold.className}`}>
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" />
+                            </svg>
                             Voltar
                         </button>
                     </Link>
