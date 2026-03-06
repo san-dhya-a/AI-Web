@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Input from "../ui/input";
 import Button from "../ui/button";
+import { acuminProBold } from "@/app/fonts";
 
 export default function LoginSection() {
     return (
-        <section className="bg-[#f2f2f2] py-24">
+        <section className="bg-[#f2f2f2] py-2 md:py-4">
             <div className="container max-w-6xl mx-auto px-6 lg:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="max-w-[400px] w-full">
@@ -64,39 +65,35 @@ export default function LoginSection() {
 
                     {/* Right side - App Download */}
                     <div className="flex items-center gap-6 lg:justify-end w-full">
-                        <div className="flex flex-col items-end gap-6 text-[#004415] text-right">
-                            <h3 className="text-[#004415] text-[28px] font-bold leading-[1.1] not-italic" style={{ fontFamily: '"Acumin Pro", sans-serif', fontStyle: 'normal' }}>
+                        <div className="flex flex-col items-end gap-6 text-[#004415] text-right mt-0">
+                            <h3 className={`text-[#004415] text-[34px] xl:text-[40px] font-bold leading-[1.05] not-italic ${acuminProBold.className}`}>
                                 Baixe<br />agora o<br />app do<br />Bora!
                             </h3>
                             <div className="flex flex-col gap-3 items-end">
                                 <Image
                                     src="/assets/image/icon/icon1.png"
                                     alt="Google Play"
-                                    width={120}
-                                    height={36}
-                                    className="h-10 w-auto cursor-pointer"
+                                    width={140}
+                                    height={42}
+                                    className="h-11 w-auto cursor-pointer"
                                 />
                                 <Image
                                     src="/assets/image/icon/icon2.png"
                                     alt="App Store"
-                                    width={120}
-                                    height={36}
-                                    className="h-10 w-auto cursor-pointer"
+                                    width={140}
+                                    height={42}
+                                    className="h-11 w-auto cursor-pointer"
                                 />
                             </div>
                         </div>
-                        <div className="relative">
+                        <div className="relative pl-6">
                             <Image
                                 src="/assets/image/banner/img2.png"
                                 alt="Mobile App"
-                                width={200}
-                                height={400}
-                                className="w-44 lg:w-48 drop-shadow-xl"
+                                width={260}
+                                height={520}
+                                className="w-[200px] lg:w-[240px] xl:w-[280px] drop-shadow-xl"
                             />
-                            {/* Floating b! Badge Overlay — right side
-                            <div className="absolute top-[25%] -right-5 bg-[#268200] p-3 rounded-lg -rotate-12 shadow-lg z-10 hidden lg:block border-[3px] border-white/30">
-                                <span className="text-white font-black italic text-3xl leading-none">b!</span>
-                            </div> */}
                         </div>
                     </div>
                 </div>

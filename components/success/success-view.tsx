@@ -16,10 +16,10 @@ export default function SuccessView({
     backHref = "/",
 }: SuccessViewProps) {
     return (
-        <main className="bg-white">
-            <div className="max-w-[1100px] mx-auto px-6 pt-2 pb-4 w-full">
+        <main className="bg-white w-full">
+            <div className="max-w-[1100px] mx-auto px-6 pt-8 pb-32">
                 {/* Main Success Messages */}
-                <div className="mb-4 text-left">
+                <div className="mb-20 text-left">
                     <p className={`font-bold text-[#148e1c] text-[14px] mb-1 ${acuminProBold.className}`}>
                         {subtitle}
                     </p>
@@ -32,11 +32,11 @@ export default function SuccessView({
                 </div>
 
                 {/* Action Button */}
-                <div className="mt-4">
+                <div className="text-left">
                     <Link href={backHref}>
-                        <button className={`flex items-center gap-3 bg-[#004415] text-white font-bold text-[14px] px-7 py-2.5 rounded-sm hover:bg-[#003310] transition-colors ${acuminProBold.className}`}>
-                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M15 19l-7-7 7-7" />
+                        <button className={`flex items-center gap-2 bg-[#004415] text-white font-bold text-[14px] px-8 py-3 rounded-sm hover:bg-[#003310] transition-colors ${acuminProBold.className}`}>
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>
                             Voltar
                         </button>

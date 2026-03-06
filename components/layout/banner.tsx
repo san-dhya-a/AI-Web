@@ -11,9 +11,9 @@ export default function Banner({
     subtitle = "Consulte e edite os seus dados se for necessário."
 }: BannerProps) {
     return (
-        <section className="bg-[#efefef]">
+        <>
             {/* Nav Row */}
-            <div className="border-b border-gray-200/50">
+            <div className="bg-[#efefef] border-b border-gray-200/50 sticky top-[81px] z-40">
                 <div className="max-w-[1100px] mx-auto px-6 h-[40px] flex items-center justify-end gap-10">
                     {/* Navigation */}
                     <nav>
@@ -85,15 +85,19 @@ export default function Banner({
             </div>
 
             {/* Banner Title */}
-            <div className="max-w-[1100px] mx-auto px-6 pt-6 pb-3 text-left">
-                <h1 className={`text-[46px] md:text-[50px] italic mb-0 text-[#004415] uppercase leading-[0.9] tracking-tighter ${acuminCondBlackItalic.className}`}>
-                    {title}
-                </h1>
-                <p className={`text-[12px] text-[#004415] font-medium ${acuminProRegular.className}`}>
-                    {subtitle}
-                </p>
-            </div>
-        </section>
+            <section className="bg-[#efefef]">
+                <div className="max-w-[1100px] mx-auto px-6 pt-6 pb-3 text-left">
+                    <h1 className={`text-[46px] md:text-[50px] italic mb-0 text-[#004415] uppercase leading-[0.9] tracking-tighter ${acuminCondBlackItalic.className}`}>
+                        {title}
+                    </h1>
+                    {subtitle && (
+                        <p className={`text-[12px] text-[#004415] font-medium mt-1 inline-block ${acuminProRegular.className}`}>
+                            {subtitle}
+                        </p>
+                    )}
+                </div>
+            </section>
+        </>
     );
 }
 

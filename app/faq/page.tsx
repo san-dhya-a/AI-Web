@@ -1,6 +1,21 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import FAQSection, { FAQGroup } from "@/components/faq/FAQSection";
+import Banner from "@/components/layout/banner";
+
+interface FAQItem {
+    id: string;
+    question: string;
+    answer: string;
+}
+
+interface FAQGroup {
+    id: string;
+    subtitle: string;
+    faqs: FAQItem[];
+}
 
 const faqData: FAQGroup[] = [
     {
@@ -98,21 +113,89 @@ const faqData: FAQGroup[] = [
     }
 ];
 
-export default function FAQPage() {
+function AccordionItem({ question, answer, isOpen, onClick }: { question: string, answer: string, isOpen: boolean, onClick: () => void }) {
+    const contentRef = useRef<HTMLDivElement>(null);
+    const [height, setHeight] = useState<number | undefined>(0);
+
+    useEffect(() => {
+        if (isOpen) {
+            const contentEl = contentRef.current;
+            if (contentEl) {
+                setHeight(contentEl.scrollHeight);
+            }
+        } else {
+            setHeight(0);
+        }
+    }, [isOpen]);
+
     return (
-        <div className="bg-[#f8f9fa] min-h-screen flex flex-col font-sans">
-            <Header />
-
-            <main className="flex-1 w-full max-w-5xl mx-auto px-6 py-12 md:py-16">
-                <div className="mb-12">
-                    <h1 className="text-[2.5rem] md:text-[3.5rem] font-extrabold italic tracking-tighter text-[#004415]">
-                        FAQ
-                    </h1>
+        <div className="border-b border-gray-200 overflow-hidden bg-transparent">
+            <button
+                type="button"
+                className="w-full flex justify-between items-center py-5 text-left focus:outline-none group transition-colors duration-150"
+                onClick={onClick}
+                aria-expanded={isOpen}
+            >
+                <span className="text-[13px] md:text-[14px] font-bold text-gray-900 pr-6 leading-snug tracking-tight">
+                    {question}
+                </span>
+                <span className="flex-shrink-0 text-gray-500 group-hover:text-gray-900 transition-colors duration-200">
+                    <svg
+                        className={`w-4 h-4 transform transition-transform duration-300 ease-in-out ${isOpen ? "rotate-180" : "rotate-0"}`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </span>
+            </button>
+            <div
+                ref={contentRef}
+                style={{ height: height !== undefined ? `${height}px` : "auto" }}
+                className={`transition-all duration-300 ease-in-out ${isOpen ? "opacity-100" : "opacity-0"}`}
+            >
+                <div className="pb-5 pt-0 text-[13px] md:text-[14px] text-gray-600 leading-relaxed max-w-[90%]">
+                    {answer}
                 </div>
+            </div>
+        </div>
+    );
+}
 
-                <div className="space-y-12">
+export default function FAQPage() {
+    const [openId, setOpenId] = useState<string | null>(null);
+
+    const toggleItem = (id: string) => {
+        setOpenId((prev) => (prev === id ? null : id));
+    };
+
+    return (
+        <div className="bg-white min-h-screen flex flex-col font-sans">
+            <Header />
+            <Banner title="FAQ" subtitle="" />
+
+            <main className="flex-1 w-full max-w-[1100px] mx-auto px-6 py-12 md:py-16">
+                <div>
                     {faqData.map((group) => (
-                        <FAQSection key={group.id} group={group} />
+                        <div key={group.id} className="mb-12 last:mb-0">
+                            <h3 className="text-[#004415] font-bold text-[17px] md:text-[19px] mb-6">
+                                {group.subtitle}
+                            </h3>
+                            <div className="bg-transparent overflow-hidden">
+                                {group.faqs.map((faq) => (
+                                    <AccordionItem
+                                        key={faq.id}
+                                        question={faq.question}
+                                        answer={faq.answer}
+                                        isOpen={openId === faq.id}
+                                        onClick={() => toggleItem(faq.id)}
+                                    />
+                                ))}
+                            </div>
+                            <hr className="border-gray-200 mt-12" />
+                        </div>
                     ))}
                 </div>
             </main>
