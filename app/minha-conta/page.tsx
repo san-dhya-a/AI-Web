@@ -7,36 +7,9 @@ import Footer from "@/components/layout/footer";
 import Image from "next/image";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { PatternFormat } from "react-number-format";
 import { acuminProBold, acuminProRegular } from "@/app/fonts";
-
-const schema = z.object({
-    cargo: z.string().min(1, "Selecione um cargo"),
-    nomeCompleto: z.string().min(3, "Nome muito curto").max(100, "Nome muito longo"),
-    cpfCnpj: z.string().min(14, "CPF ou CNPJ inválido"),
-    email: z.string().email("E-mail inválido"),
-    cep: z.string().min(9, "CEP inválido"),
-    endereco: z.string().min(3, "Endereço obrigatório"),
-    numero: z.string().min(1, "Obrigatório"),
-    complemento: z.string().optional(),
-    uf: z.string().min(1, "Obrigatório"),
-    cidade: z.string().min(2, "Cidade obrigatória"),
-    bairro: z.string().min(2, "Bairro obrigatório"),
-    dddResidencial: z.string().optional(),
-    telefoneResidencial: z.string().optional(),
-    dddCelular: z.string().min(2, "Obrigatório"),
-    telefoneCelular: z.string().min(9, "Obrigatório"),
-    genero: z.string().min(1, "Selecione o gênero"),
-    senhaAtual: z.string().min(6, "Senha deve ter no mínimo 6 caracteres"),
-    novaSenha: z.string().min(6, "Senha deve ter no mínimo 6 caracteres"),
-    confirmarNovaSenha: z.string().min(6, "Senha deve ter no mínimo 6 caracteres"),
-}).refine((data) => data.novaSenha === data.confirmarNovaSenha, {
-    message: "As senhas não coincidem",
-    path: ["confirmarNovaSenha"],
-});
-
-type FormData = z.infer<typeof schema>;
+import { minhaContaSchema, type MinhaContaFormData } from "@/services/form-controller/schemas";
 
 export default function MinhaContaPage() {
     const router = useRouter();
@@ -45,8 +18,8 @@ export default function MinhaContaPage() {
         handleSubmit,
         control,
         formState: { errors },
-    } = useForm<FormData>({
-        resolver: zodResolver(schema),
+    } = useForm<MinhaContaFormData>({
+        resolver: zodResolver(minhaContaSchema),
         defaultValues: {
             cargo: "PDV",
             nomeCompleto: "Roberto da Silva Santos",
@@ -70,7 +43,7 @@ export default function MinhaContaPage() {
         }
     });
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = (data: MinhaContaFormData) => {
         console.log(data);
         router.push("/minha-conta/success");
     };

@@ -3,29 +3,13 @@
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import Banner from "@/components/layout/banner";
 import { acuminProBold, acuminProRegular } from "@/app/fonts";
-
-const contactSchema = z.object({
-    nome: z.string().min(1, "Nome é obrigatório"),
-    email: z.string().min(1, "E-mail é obrigatório").email("E-mail inválido"),
-    cpfCnpj: z.string()
-        .min(1, "CPF/CNPJ é obrigatório")
-        .refine((val) => {
-            const numbers = val.replace(/\D/g, "");
-            return numbers.length === 11 || numbers.length === 14;
-        }, {
-            message: "CPF deve ter 11 dígitos ou CNPJ 14 dígitos",
-        }),
-    mensagem: z.string().min(1, "Mensagem é obrigatória"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { contactSchema, type ContactFormData } from "@/services/form-controller/schemas";
 
 const maskCpfCnpj = (value: string) => {
     let v = value.replace(/\D/g, "");
