@@ -110,10 +110,6 @@ export const apiController = {
         });
     },
 
-    /**
-     * DELETE method
-     * @param endpoint - The API endpoint to delete
-     */
     delete: async <TRes = any>(
         endpoint: string
     ): Promise<TRes> => {

@@ -5,8 +5,39 @@ import Link from "next/link";
 import Input from "../ui/input";
 import Button from "../ui/button";
 import { acuminProBold } from "@/app/fonts";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema, LoginFormData } from "@/services/form-controller/schemas";
+import { dataHolder } from "@/services/data-holder";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginSection() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginFormData>({
+        resolver: zodResolver(loginSchema),
+    });
+
+    const onSubmit = async (data: LoginFormData) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            await dataHolder.login(data);
+            router.push("/minha-conta");
+        } catch (err: any) {
+            setError(err.message || "Falha ao realizar login. Verifique suas credenciais.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <section className="bg-[#f2f2f2] py-2 md:py-4">
             <div className="container max-w-6xl mx-auto px-6 lg:px-12">
@@ -15,14 +46,21 @@ export default function LoginSection() {
                         <h3 className="text-[#004415] font-bold text-[13px] mb-8">
                             Faça o login abaixo para começar:
                         </h3>
-                        <form className="space-y-8">
+                        <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                            {error && (
+                                <div className="text-red-600 text-[11px] font-medium mb-2">
+                                    {error}
+                                </div>
+                            )}
                             <div className="space-y-1">
                                 <Input
+                                    {...register("email")}
                                     label="Login (E-mail)"
                                     type="email"
                                     variant="line"
                                     labelClassName="text-[11px] text-gray-800 font-normal mb-0"
                                     className="placeholder:text-transparent text-sm py-1 border-gray-600"
+                                    error={errors.email?.message}
                                 />
                                 <div className="flex justify-end pt-1">
                                     <Link href="#" className="text-[10px] text-gray-800 hover:text-green-700">
@@ -33,11 +71,13 @@ export default function LoginSection() {
 
                             <div className="space-y-1">
                                 <Input
+                                    {...register("senha")}
                                     label="Senha"
                                     type="password"
                                     variant="line"
                                     labelClassName="text-[11px] text-gray-800 font-normal mb-0"
                                     className="placeholder:text-transparent text-sm py-1 border-gray-600"
+                                    error={errors.senha?.message}
                                 />
                                 <div className="flex justify-end pt-1">
                                     <Link href="#" className="text-[10px] text-gray-800 hover:text-green-700">
@@ -46,11 +86,14 @@ export default function LoginSection() {
                                 </div>
                             </div>
 
-                            <Link href="/minha-conta" className="block mt-4">
-                                <Button fullWidth type="button" className="text-base py-3.5 bg-[#004415] hover:bg-[#003310] font-bold">
-                                    Entrar
-                                </Button>
-                            </Link>
+                            <Button
+                                fullWidth
+                                type="submit"
+                                className="text-base py-3.5 bg-[#004415] hover:bg-[#003310] font-bold mt-4"
+                                isLoading={isLoading}
+                            >
+                                Entrar
+                            </Button>
                         </form>
                         <p className="text-center mt-6 text-[12px] text-black">
                             Primeiro acesso?{" "}
