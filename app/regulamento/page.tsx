@@ -1,5 +1,7 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import Banner from "@/components/layout/banner";
+import { acuminProBold, acuminProRegular } from "@/app/fonts";
 
 const sections = [
     {
@@ -30,28 +32,25 @@ const sections = [
 
 export default function RegulamentoPage() {
     return (
-        <div className="bg-[#f8f9fa] min-h-screen flex flex-col font-sans">
+        <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`}>
             <Header />
+            <Banner
+                title="REGULAMENTO"
+                subtitle="Consulte as regras e condições de participação do programa."
+            />
 
-            <main className="flex-1 w-full max-w-5xl mx-auto px-6 py-12 md:py-16">
-                {/* Page Title */}
-                <div className="mb-12">
-                    <h1 className="text-[2.5rem] md:text-[3.5rem] font-extrabold italic tracking-tighter text-[#004415]">
-                        REGULAMENTO
-                    </h1>
-                </div>
-
+            <main className="flex-1 w-full max-w-[1100px] mx-auto px-6 py-12 md:py-16">
                 {/* Content Sections */}
                 <div className="space-y-12">
                     {sections.map((section) => (
                         <section key={section.id} className="space-y-4">
-                            <h2 className="text-sm font-bold text-gray-900">
+                            <h2 className={`text-[12px] font-bold text-black uppercase ${acuminProBold.className}`}>
                                 {section.title}
                             </h2>
                             {section.paragraphs.map((para, idx) => (
                                 <p
                                     key={idx}
-                                    className="text-sm text-gray-700 leading-relaxed"
+                                    className="text-[14px] text-gray-700 leading-relaxed font-normal"
                                 >
                                     {para}
                                 </p>
