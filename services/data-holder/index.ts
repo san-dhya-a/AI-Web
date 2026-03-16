@@ -1,10 +1,7 @@
-import { apiController } from "../api-controller";
-
-export const dataHolder = {
-    login: async (data: any) => {
-        return apiController.post("/auth/login", {
-            username: data.email,
-            password: data.senha,
-        });
-    },
+export const ENDPOINTS = {
+    LOGIN: "/auth/login",
+    REGISTER: "/auth/register",
+    CONTACT: "/contact",
+    GET_ACCOUNT: "/account/profile",
+    UPDATE_ACCOUNT: "/account/update-profile",
 };

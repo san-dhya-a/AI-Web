@@ -4,7 +4,10 @@
  * Manages API responses with Promises, resolving data on success and rejecting on error.
  */
 
-const BASE_URL = process.env.Base_URL || "http://localhost:3000/";
+import { getCookie } from "@/utils/cookieUtils";
+
+
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 // Helper to format the full URL
 const getFullUrl = (endpoint: string, params?: Record<string, string>) => {
@@ -28,7 +31,17 @@ async function request<TRes = any>(
     options: RequestInit
 ): Promise<TRes> {
     try {
+        // Add Authorization header if token exists
+        const token = getCookie("auth_token");
+        if (token) {
+            options.headers = {
+                ...options.headers,
+                "Authorization": `Bearer ${token}`,
+            };
+        }
+
         const response = await fetch(url, options);
+
 
         if (!response.ok) {
             // Reject with status and error message if the response is not ok
@@ -87,6 +100,26 @@ export const apiController = {
                 "Accept": "application/json",
             },
             body: JSON.stringify(body),
+        });
+    },
+
+    /**
+     * POST form data method (for file uploads)
+     * @param endpoint - The API endpoint to post to
+     * @param body - The FormData payload
+     */
+    postForm: async <TRes = any>(
+        endpoint: string,
+        body: FormData
+    ): Promise<TRes> => {
+        const url = getFullUrl(endpoint);
+        return request<TRes>(url, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                // Note: Don't set Content-Type for FormData, the browser will set it with boundary
+            },
+            body: body,
         });
     },
 

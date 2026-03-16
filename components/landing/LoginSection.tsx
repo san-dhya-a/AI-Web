@@ -8,9 +8,11 @@ import { acuminProBold } from "@/app/fonts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginFormData } from "@/services/form-controller/schemas";
-import { dataHolder } from "@/services/data-holder";
+import { apiController } from "@/services/api-controller";
+import { ENDPOINTS } from "@/services/data-holder";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { setCookie } from "@/utils/cookieUtils";
 
 export default function LoginSection() {
     const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +31,20 @@ export default function LoginSection() {
         setIsLoading(true);
         setError(null);
         try {
-            await dataHolder.login(data);
+            const response = await apiController.post(ENDPOINTS.LOGIN, {
+                email: data.email,
+                password: data.senha,
+            });
+
+            if (response.error) {
+                setError(response.message || "Invalid credentials");
+                return;
+            }
+
+            if (response.data?.token) {
+                setCookie("auth_token", response.data.token, 1);
+            }
+
             router.push("/minha-conta");
         } catch (err: any) {
             setError(err.message || "Falha ao realizar login. Verifique suas credenciais.");
@@ -39,11 +54,11 @@ export default function LoginSection() {
     };
 
     return (
-        <section className="bg-[#f2f2f2] py-2 md:py-4">
+        <section className="bg-[#f2f2f2] py-12 md:py-20">
             <div className="container max-w-6xl mx-auto px-6 lg:px-12">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div className="max-w-[400px] w-full">
-                        <h3 className="text-[#004415] font-bold text-[13px] mb-8">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.27fr_1fr] gap-12 items-center">
+                    <div className="max-w-[400px] w-full lg:pr-8">
+                        <h3 className="text-[#004415] font-bold text-[13px] mb-8 uppercase">
                             Faça o login abaixo para começar:
                         </h3>
                         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
@@ -58,7 +73,7 @@ export default function LoginSection() {
                                     label="Login (E-mail)"
                                     type="email"
                                     variant="line"
-                                    labelClassName="text-[11px] text-gray-800 font-normal mb-0"
+                                    labelClassName="text-[12px] text-black font-normal mb-0"
                                     className="placeholder:text-transparent text-sm py-1 border-gray-600"
                                     error={errors.email?.message}
                                 />
@@ -75,7 +90,7 @@ export default function LoginSection() {
                                     label="Senha"
                                     type="password"
                                     variant="line"
-                                    labelClassName="text-[11px] text-gray-800 font-normal mb-0"
+                                    labelClassName="text-[12px] text-black font-normal mb-0"
                                     className="placeholder:text-transparent text-sm py-1 border-gray-600"
                                     error={errors.senha?.message}
                                 />
@@ -98,7 +113,7 @@ export default function LoginSection() {
                         <p className="text-center mt-6 text-[12px] text-black">
                             Primeiro acesso?{" "}
                             <Link
-                                href="#"
+                                href="/"
                                 className="text-[#004415] font-bold hover:text-[#003310]"
                             >
                                 Cadastre-se já!
@@ -108,11 +123,11 @@ export default function LoginSection() {
 
                     {/* Right side - App Download */}
                     <div className="flex items-center gap-6 lg:justify-end w-full">
-                        <div className="flex flex-col items-end gap-6 text-[#004415] text-right mt-0">
+                        <div className="flex flex-col items-center lg:items-end gap-6 text-[#004415] text-center lg:text-right mt-0">
                             <h3 className={`text-[#004415] text-[34px] xl:text-[40px] font-bold leading-[1.05] not-italic ${acuminProBold.className}`}>
                                 Baixe<br />agora o<br />app do<br />Bora!
                             </h3>
-                            <div className="flex flex-col gap-3 items-end">
+                            <div className="flex flex-col gap-3 items-center lg:items-end">
                                 <Image
                                     src="/assets/image/icon/icon1.png"
                                     alt="Google Play"
@@ -129,7 +144,7 @@ export default function LoginSection() {
                                 />
                             </div>
                         </div>
-                        <div className="relative pl-6">
+                        <div className="relative pl-6 hidden sm:block">
                             <Image
                                 src="/assets/image/banner/img2.png"
                                 alt="Mobile App"

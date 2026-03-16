@@ -10,6 +10,8 @@ import Footer from "@/components/layout/footer";
 import Banner from "@/components/layout/banner";
 import { acuminProBold, acuminProRegular } from "@/app/fonts";
 import { contactSchema, type ContactFormData } from "@/services/form-controller/schemas";
+import { apiController } from "@/services/api-controller";
+import { ENDPOINTS } from "@/services/data-holder";
 
 const maskCpfCnpj = (value: string) => {
     let v = value.replace(/\D/g, "");
@@ -44,12 +46,28 @@ export default function FaleConoscoPage() {
     });
 
     const onSubmit = async (data: ContactFormData) => {
-        // Simulate a network request
-        await new Promise((res) => setTimeout(res, 800));
-        console.log("Form submitted:", { ...data, file: selectedFile });
-        reset();
-        setSelectedFile(null);
-        router.push("/fale-conosco/success");
+        try {
+            console.log("Submitting contact form...");
+            const formData = new FormData();
+            formData.append("name", data.nome);
+            formData.append("email", data.email);
+            formData.append("cpf_cnpj", data.cpfCnpj.replace(/\D/g, ""));
+            formData.append("message", data.mensagem);
+            
+            if (selectedFile) {
+                formData.append("file", selectedFile);
+            }
+
+            const response = await apiController.postForm(ENDPOINTS.CONTACT, formData);
+            console.log("Contact submission successful:", response);
+            
+            reset();
+            setSelectedFile(null);
+            router.push("/fale-conosco/success");
+        } catch (err: any) {
+            console.error("Contact submission error:", err);
+            alert(err.message || "Erro ao enviar mensagem. Por favor, tente novamente.");
+        }
     };
 
     return (

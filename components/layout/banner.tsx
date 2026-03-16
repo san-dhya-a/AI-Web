@@ -4,16 +4,17 @@ import { acuminBoldItalic, acuminProBold, acuminCondBlackItalic, acuminProRegula
 interface BannerProps {
     title?: string;
     subtitle?: string;
+    isMounted?: boolean;
 }
 
 export default function Banner({
     title = "MINHA CONTA",
-    subtitle = "Consulte e edite os seus dados se for necessário."
+    subtitle = "Consulte e edite os seus dados se for necessário.",
 }: BannerProps) {
     return (
         <>
             {/* Nav Row */}
-            <div className="bg-[#efefef] border-b border-gray-200/50 sticky top-[81px] z-40">
+            <div className="bg-[#efefef] border-b border-gray-200/50 sticky top-[81px] z-40" suppressHydrationWarning>
                 <div className="max-w-[1100px] mx-auto px-6 h-[40px] flex items-center justify-end gap-10">
                     {/* Navigation */}
                     <nav>
@@ -61,7 +62,8 @@ export default function Banner({
                             <input
                                 type="text"
                                 placeholder="O que está procurando?"
-                                className={`bg-transparent text-[10px] w-[180px] outline-none placeholder:text-gray-400 font-medium ${acuminProRegular.className}`}
+                                className={`bg-transparent text-[10px] w-[180px] outline-none placeholder:text-gray-400 ${acuminProRegular.className}`}
+                                suppressHydrationWarning
                             />
                             <button className="ml-1">
                                 <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,7 +87,7 @@ export default function Banner({
             </div>
 
             {/* Banner Title */}
-            <section className="bg-[#efefef]">
+            <section className="bg-[#efefef]" suppressHydrationWarning>
                 <div className="max-w-[1100px] mx-auto px-6 pt-6 pb-3 text-left">
                     <h1 className={`text-[46px] md:text-[50px] italic mb-0 text-[#004415] uppercase leading-[0.9] tracking-tighter ${acuminCondBlackItalic.className}`}>
                         {title}

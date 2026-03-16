@@ -19,6 +19,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 <label className={`text-sm font-medium text-gray-700 mb-1 ${labelClassName}`}>{label}</label>
                 <input
                     ref={ref}
+                    suppressHydrationWarning
                     className={`${baseInputStyles} ${variantStyles} ${error ? "border-red-500" : ""} ${className}`}
                     {...props}
                 />

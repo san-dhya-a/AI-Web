@@ -18,8 +18,8 @@
   --color-vibra-gray: var(--vibra-bg-gray);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-acumin-cond-regular: var(--font-acumin-cond-regular), sans-serif;
-  --font-acumin-cond-semibold: var(--font-acumin-cond-semibold), sans-serif;
+  --font-acumin-pro-regular: var(--font-acumin-pro-regular), sans-serif;
+  --font-acumin-pro-bold: var(--font-acumin-pro-bold), sans-serif;
   --font-acumin-cond-black-italic: var(--font-acumin-cond-black-italic), sans-serif;
   --font-acumin-bold-italic: var(--font-acumin-bold-italic), sans-serif;
 }

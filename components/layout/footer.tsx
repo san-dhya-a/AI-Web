@@ -48,7 +48,7 @@ const footerLinks = [
 
 export default function Footer() {
     return (
-        <footer className={`bg-[#004415] text-white pt-12 pb-8 ${acuminProRegular.className}`}>
+        <footer className={`bg-[#004415] text-white pt-12 pb-8 ${acuminProRegular.className}`} suppressHydrationWarning>
             <div className="max-w-[1100px] mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between pb-8">
                     {/* Logo & Social Links (Left Side) */}

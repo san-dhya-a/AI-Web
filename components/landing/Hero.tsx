@@ -20,10 +20,10 @@ export default function Hero() {
 
             {/* Standard container — same as rest of the site */}
             <div className="container max-w-6xl mx-auto px-6 lg:px-12 relative z-10">
-                <div className="flex flex-col justify-between min-h-[300px] py-6 lg:w-[56%]">
+                <div className="flex flex-col py-6 lg:w-[56%]">
 
                     {/* Logo */}
-                    <div className="pt-4 mb-20">
+                    <div className="pt-4 mb-12">
                         <Image
                             src="/assets/image/icon/vibra.png"
                             alt="Vibra Logo"
@@ -34,8 +34,8 @@ export default function Hero() {
                     </div>
 
                     {/* Heading + Subtitle */}
-                    <div className="flex flex-col gap-[20px] pb-[20px]">
-                        <h1 className="font-acumin-cond-black-italic text-[78px] tracking-tighter leading-[0.85] uppercase">
+                    <div className="flex flex-col gap-[15px] pb-[20px]">
+                        <h1 className="font-acumin-cond-black-italic italic font-black text-[54px] tracking-tighter leading-[0.8] uppercase">
                             <span className="text-[#004415]">BORA GANHAR</span><br />
                             <span className="text-[#369c1f]">AINDA MAIS?</span>
                         </h1>

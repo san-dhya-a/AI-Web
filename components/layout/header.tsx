@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { acuminProRegular } from "@/app/fonts";
 
 export default function Header() {
     return (
@@ -28,12 +29,12 @@ export default function Header() {
                         />
                     </div>
                     <div className="flex flex-col text-left">
-                        <p className="text-[11px] font-medium text-gray-600 leading-tight">
+                        <p className={`text-[11px] font-medium text-gray-600 leading-tight ${acuminProRegular.className}`}>
                             Olá, <span className="font-bold text-[#004415]">Marcelo Almeida</span>
                         </p>
                         <div className="flex items-center justify-start gap-1.5 mt-0.5">
                             <span className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                            <p className="text-[11px] text-gray-600 font-medium leading-tight">
+                            <p className={`text-[11px] text-gray-600 font-medium leading-tight ${acuminProRegular.className}`}>
                                 Você tem <span className="font-bold text-[#004415]">345.400 PTS</span>
                             </p>
                             <svg className="w-3 h-3 text-[#004415]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
