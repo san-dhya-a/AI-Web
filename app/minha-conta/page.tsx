@@ -14,6 +14,7 @@ import { minhaContaSchema, type MinhaContaFormData } from "@/services/form-contr
 import { apiController } from "@/services/api-controller";
 import { ENDPOINTS } from "@/services/data-holder";
 import { getCookie } from "@/utils/cookieUtils";
+import { useRef } from "react";
 
 
 export default function MinhaContaPage() {
@@ -21,6 +22,10 @@ export default function MinhaContaPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [fetchError, setFetchError] = useState<string | null>(null);
     const [isMounted, setIsMounted] = useState(false);
+    const [profileImageUrl, setProfileImageUrl] = useState<string>("/images/avator.png");
+    const [isUploading, setIsUploading] = useState(false);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         setIsMounted(true);
@@ -59,13 +64,14 @@ export default function MinhaContaPage() {
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const token = getCookie("auth_token");
-            if (!token) {
-                router.push("/");
-                return;
-            }
-
             try {
+                if (isMounted) {
+                    const token = getCookie("auth_token");
+                    if (!token) {
+                        router.push("/");
+                        return;
+                    }
+                }
                 setIsLoading(true);
                 const response = await apiController.get(ENDPOINTS.GET_ACCOUNT);
 
@@ -113,40 +119,87 @@ export default function MinhaContaPage() {
                         confirmarNovaSenha: ""
                     };
                     reset(formValues);
+
+                    // Set profile image from backend if available
+                    if (userData.fotoPerfil) {
+                        const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "");
+                        setProfileImageUrl(`${baseUrl}${userData.fotoPerfil}`);
+                    }
                 }
             } catch (err: any) {
-                setFetchError(err.message || "Falha ao carregar dados do usuário.");
+                console.error("[Profile Fetch Fatal Error]", err);
+                const errorMsg = err.message || (err.data && err.data.message) || "Falha ao carregar dados do usuário.";
+                setFetchError(errorMsg);
             } finally {
                 setIsLoading(false);
             }
         };
 
         fetchUserData();
-    }, [reset, router]);
+    }, [isMounted, reset, router]);
 
     const onSubmit = async (data: MinhaContaFormData) => {
-        console.log("Form submitted successfully:", data);
+        setIsUploading(true);
         try {
-            const payload: any = {
-                ...data,
-                telefoneResidencial: `${data.dddResidencial || ""}${data.telefoneResidencial || ""}`.replace(/\D/g, ""),
-                telefoneCelular: `${data.dddCelular || ""}${data.telefoneCelular || ""}`.replace(/\D/g, ""),
-            };
+            const formData = new FormData();
+            
+            // Append text fields
+            formData.append("cargo", data.cargo);
+            formData.append("nomeCompleto", data.nomeCompleto);
+            formData.append("cpfCnpj", data.cpfCnpj.replace(/\D/g, ""));
+            formData.append("email", data.email);
+            formData.append("cep", data.cep.replace(/\D/g, ""));
+            formData.append("endereco", data.endereco);
+            formData.append("numero", data.numero);
+            formData.append("complemento", data.complemento || "");
+            formData.append("uf", data.uf);
+            formData.append("cidade", data.cidade);
+            formData.append("bairro", data.bairro);
+            
+            const telRes = `${data.dddResidencial || ""}${data.telefoneResidencial || ""}`.replace(/\D/g, "");
+            const telCel = `${data.dddCelular || ""}${data.telefoneCelular || ""}`.replace(/\D/g, "");
+            formData.append("telefoneResidencial", telRes);
+            formData.append("telefoneCelular", telCel);
+            formData.append("genero", data.genero);
 
-            if (!data.novaSenha || data.novaSenha.trim() === "") {
-                delete payload.senhaAtual;
-                delete payload.novaSenha;
-                delete payload.confirmarNovaSenha;
+            // Password fields (only if provided)
+            if (data.novaSenha && data.novaSenha.trim() !== "") {
+                formData.append("senhaAtual", data.senhaAtual || "");
+                formData.append("novaSenha", data.novaSenha);
             }
 
-            console.log("Sending payload to backend:", payload);
-            await apiController.put(ENDPOINTS.UPDATE_ACCOUNT, payload);
+            // Append image file if selected (key must match backend multer expectation)
+            if (selectedFile) {
+                formData.append("fotoPerfil", selectedFile);
+            }
+
+            console.log("Sending unified multipart update...");
+            await apiController.putForm(ENDPOINTS.UPDATE_ACCOUNT, formData);
+            
             console.log("Update successful, redirecting...");
             router.push("/minha-conta/success");
         } catch (err: any) {
-            console.error("API Error:", err);
+            console.error("Detailed API Error:", JSON.stringify(err, Object.getOwnPropertyNames(err), 2));
             alert(err.message || "Erro ao salvar alterações.");
+        } finally {
+            setIsUploading(false);
         }
+    };
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        // Store file for later submission
+        setSelectedFile(file);
+
+        // Preview locally
+        const previewUrl = URL.createObjectURL(file);
+        setProfileImageUrl(previewUrl);
+    };
+
+    const handleEditPhotoClick = () => {
+        fileInputRef.current?.click();
     };
 
     const onError = (errors: any) => {
@@ -190,17 +243,34 @@ export default function MinhaContaPage() {
                         <div className="flex flex-col md:flex-row gap-5 lg:gap-8">
                             <div className="w-[180px] shrink-0">
                                 <p className="text-[10px] font-bold text-[#004415] mb-8">* Campo Obrigatório</p>
-                                <div className="flex flex-col items-center shrink-0 relative w-[130px] h-[130px] rounded-full overflow-hidden bg-gray-100 shadow-sm">
+                                <div className="flex flex-col items-center shrink-0 relative w-[130px] h-[130px] rounded-full overflow-hidden bg-gray-200 shadow-sm border-2 border-white group">
                                     <Image
-                                        src="/images/avator.png"
+                                        src={profileImageUrl}
                                         alt="Profile"
                                         width={130}
                                         height={130}
-                                        className="w-full h-full object-cover"
+                                        className={`w-full h-full object-cover transition-opacity duration-300 ${isUploading ? 'opacity-50' : 'opacity-100'}`}
                                     />
-                                    <button type="button" className="absolute bottom-0 left-0 w-full bg-[#004415]/90 text-white text-[11px] py-1.5 font-bold hover:bg-[#004415] transition-colors">
-                                        Editar Foto
+                                    {isUploading && (
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <div className="w-6 h-6 border-2 border-[#004415] border-t-transparent rounded-full animate-spin"></div>
+                                        </div>
+                                    )}
+                                    <button 
+                                        type="button" 
+                                        onClick={handleEditPhotoClick}
+                                        disabled={isUploading}
+                                        className="absolute bottom-0 left-0 w-full bg-[#004415]/90 text-white text-[11px] py-1.5 font-bold hover:bg-[#004415] transition-colors disabled:bg-gray-400"
+                                    >
+                                        {isUploading ? "Enviando..." : "Editar Foto"}
                                     </button>
+                                    <input 
+                                        type="file" 
+                                        ref={fileInputRef} 
+                                        className="hidden" 
+                                        accept="image/*"
+                                        onChange={handleImageChange}
+                                    />
                                 </div>
                             </div>
 
@@ -495,9 +565,10 @@ export default function MinhaContaPage() {
                             </button>
                             <button
                                 type="submit"
-                                className={`bg-[#004415] text-white font-bold text-[15px] px-10 py-3 hover:bg-[#003310] transition-colors ${acuminProBold.className}`}
+                                disabled={isUploading}
+                                className={`bg-[#004415] text-white font-bold text-[15px] px-10 py-3 hover:bg-[#003310] transition-colors ${acuminProBold.className} ${isUploading ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
-                                Salvar Alterações
+                                {isUploading ? "Salvando..." : "Salvar Alterações"}
                             </button>
                         </div>
                     </form>

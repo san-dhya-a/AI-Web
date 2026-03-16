@@ -10,14 +10,22 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginFormData } from "@/services/form-controller/schemas";
 import { apiController } from "@/services/api-controller";
 import { ENDPOINTS } from "@/services/data-holder";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { setCookie } from "@/utils/cookieUtils";
+import { setCookie, getCookie } from "@/utils/cookieUtils";
 
 export default function LoginSection() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [isMounted, setIsMounted] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        setIsMounted(true);
+        if (getCookie("auth_token")) {
+            router.push("/home");
+        }
+    }, [router]);
 
     const {
         register,
@@ -45,7 +53,7 @@ export default function LoginSection() {
                 setCookie("auth_token", response.data.token, 1);
             }
 
-            router.push("/minha-conta");
+            router.push("/home");
         } catch (err: any) {
             setError(err.message || "Falha ao realizar login. Verifique suas credenciais.");
         } finally {
@@ -113,7 +121,7 @@ export default function LoginSection() {
                         <p className="text-center mt-6 text-[12px] text-black">
                             Primeiro acesso?{" "}
                             <Link
-                                href="/"
+                                href="/register"
                                 className="text-[#004415] font-bold hover:text-[#003310]"
                             >
                                 Cadastre-se já!

@@ -40,15 +40,25 @@ async function request<TRes = any>(
             };
         }
 
+        console.log(`[API Request] ${options.method} ${url}`, { headers: options.headers });
         const response = await fetch(url, options);
+        console.log(`[API Response] Status: ${response.status} ${response.statusText}`);
 
 
         if (!response.ok) {
-            // Reject with status and error message if the response is not ok
-            const errorData = await response.json().catch(() => ({}));
+            const rawBody = await response.text().catch(() => "");
+            console.error(`[API Error Response Body] ${rawBody}`);
+            
+            let errorData = {};
+            try {
+                errorData = JSON.parse(rawBody);
+            } catch (e) {
+                console.warn("[API] Failed to parse error response as JSON");
+            }
+
             return Promise.reject({
                 status: response.status,
-                message: errorData.message || response.statusText || "Request failed",
+                message: (errorData as any).message || response.statusText || "Request failed",
                 data: errorData,
             });
         }
@@ -140,6 +150,25 @@ export const apiController = {
                 "Accept": "application/json",
             },
             body: JSON.stringify(body),
+        });
+    },
+
+    /**
+     * PUT form data method (for file uploads)
+     * @param endpoint - The API endpoint to update
+     * @param body - The FormData payload
+     */
+    putForm: async <TRes = any>(
+        endpoint: string,
+        body: FormData
+    ): Promise<TRes> => {
+        const url = getFullUrl(endpoint);
+        return request<TRes>(url, {
+            method: "PUT",
+            headers: {
+                "Accept": "application/json",
+            },
+            body: body,
         });
     },
 
