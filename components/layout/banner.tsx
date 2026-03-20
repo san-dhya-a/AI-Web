@@ -14,7 +14,7 @@ export default function Banner({
     return (
         <>
             {/* Nav Row */}
-            <div className="bg-[#efefef] border-b border-gray-200/50 sticky top-[81px] z-40" suppressHydrationWarning>
+            <div className="bg-[#f2f2f2] sticky top-[95px] z-40" suppressHydrationWarning>
                 <div className="max-w-[1100px] mx-auto px-6 h-[40px] flex items-center justify-end gap-10">
                     {/* Navigation */}
                     <nav>
@@ -87,8 +87,8 @@ export default function Banner({
             </div>
 
             {/* Banner Title */}
-            <section className="bg-[#efefef]" suppressHydrationWarning>
-                <div className="max-w-[1100px] mx-auto px-6 pt-6 pb-3 text-left">
+            <section className="bg-[#f2f2f2] border-b border-gray-100" suppressHydrationWarning>
+                <div className="max-w-[1100px] mx-auto px-6 pt-5 pb-5 text-left">
                     <h1 className={`text-[46px] md:text-[50px] italic mb-0 text-[#004415] uppercase leading-[0.9] tracking-tighter ${acuminCondBlackItalic.className}`}>
                         {title}
                     </h1>

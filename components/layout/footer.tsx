@@ -55,7 +55,7 @@ export default function Footer() {
                     <div className="flex flex-col justify-between w-[200px]">
                         <div>
                             <Image
-                                src="/images/vibra.png"
+                                src="/assets/image/icon/vibra.png"
                                 alt="Vibra Logo"
                                 width={100}
                                 height={26}
@@ -64,14 +64,14 @@ export default function Footer() {
                         </div>
                         <div className="flex gap-4 mt-8 md:mt-[6.5rem]">
                             <Image
-                                src="/images/insta.png"
+                                src="/assets/image/icon/insta.png"
                                 alt="Instagram"
                                 width={18}
                                 height={18}
                                 className="h-[14px] w-auto brightness-0 invert hover:opacity-80 transition cursor-pointer"
                             />
                             <Image
-                                src="/images/youtube.png"
+                                src="/assets/image/icon/youtube.png"
                                 alt="YouTube"
                                 width={18}
                                 height={18}

@@ -13,11 +13,7 @@ export default function RootPage() {
 
     useEffect(() => {
         setIsMounted(true);
-        // Guard: If already logged in, redirect to home
-        if (getCookie("auth_token")) {
-            router.push("/home");
-        }
-    }, [router]);
+    }, []);
 
     if (!isMounted) return null;
     return (

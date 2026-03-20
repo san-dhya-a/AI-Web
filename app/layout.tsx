@@ -25,6 +25,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Vibra — Minha Conta",
   description: "Consulte e edite os seus dados de perfil.",
+  icons: {
+    icon: "/assets/image/icon/favicon.ico",
+  },
 };
 
 export default function RootLayout({

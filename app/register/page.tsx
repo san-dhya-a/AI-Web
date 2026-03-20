@@ -23,11 +23,7 @@ export default function RegisterPage() {
 
     useEffect(() => {
         setIsMounted(true);
-        // Guard: If logged in, redirect to home
-        if (getCookie("auth_token")) {
-            router.push("/home");
-        }
-    }, [router]);
+    }, []);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -118,7 +114,7 @@ export default function RegisterPage() {
 
                             <div className="flex flex-col items-center shrink-0 relative w-[130px] h-[130px] rounded-full overflow-hidden bg-gray-100 shadow-sm mb-6 group">
                                 <Image
-                                    src={profileImg || "/images/avator.png"}
+                                    src={profileImg || "/assets/image/icon/avatar.png"}
                                     alt="Profile"
                                     width={130}
                                     height={130}

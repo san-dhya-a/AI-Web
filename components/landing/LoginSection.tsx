@@ -22,10 +22,7 @@ export default function LoginSection() {
 
     useEffect(() => {
         setIsMounted(true);
-        if (getCookie("auth_token")) {
-            router.push("/home");
-        }
-    }, [router]);
+    }, []);
 
     const {
         register,
@@ -131,11 +128,11 @@ export default function LoginSection() {
 
                     {/* Right side - App Download */}
                     <div className="flex items-center gap-6 lg:justify-end w-full">
-                        <div className="flex flex-col items-center lg:items-end gap-6 text-[#004415] text-center lg:text-right mt-0">
+                        <div className="flex flex-col items-center lg:items-start gap-6 text-[#004415] text-center lg:text-left mt-0">
                             <h3 className={`text-[#004415] text-[34px] xl:text-[40px] font-bold leading-[1.05] not-italic ${acuminProBold.className}`}>
-                                Baixe<br />agora o<br />app do<br />Bora!
+                                Baixe agora o<br />app do Bora!
                             </h3>
-                            <div className="flex flex-col gap-3 items-center lg:items-end">
+                            <div className="flex flex-col gap-3 items-center lg:items-start">
                                 <Image
                                     src="/assets/image/icon/icon1.png"
                                     alt="Google Play"

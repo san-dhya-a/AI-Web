@@ -22,7 +22,7 @@ export default function MinhaContaPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [fetchError, setFetchError] = useState<string | null>(null);
     const [isMounted, setIsMounted] = useState(false);
-    const [profileImageUrl, setProfileImageUrl] = useState<string>("/images/avator.png");
+    const [profileImageUrl, setProfileImageUrl] = useState<string>("/assets/image/icon/avatar.png");
     const [isUploading, setIsUploading] = useState(false);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -120,11 +120,13 @@ export default function MinhaContaPage() {
                     };
                     reset(formValues);
 
+                    /* 
                     // Set profile image from backend if available
                     if (userData.fotoPerfil) {
                         const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "");
                         setProfileImageUrl(`${baseUrl}${userData.fotoPerfil}`);
                     }
+                    */
                 }
             } catch (err: any) {
                 console.error("[Profile Fetch Fatal Error]", err);
@@ -249,6 +251,7 @@ export default function MinhaContaPage() {
                                         alt="Profile"
                                         width={130}
                                         height={130}
+                                        unoptimized={profileImageUrl.startsWith('http')}
                                         className={`w-full h-full object-cover transition-opacity duration-300 ${isUploading ? 'opacity-50' : 'opacity-100'}`}
                                     />
                                     {isUploading && (

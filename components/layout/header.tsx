@@ -19,7 +19,7 @@ export default function Header() {
     useEffect(() => {
         const token = getCookie("auth_token");
         setIsLoggedIn(!!token);
-        
+
         if (token) {
             const fetchProfile = async () => {
                 try {
@@ -59,7 +59,7 @@ export default function Header() {
                 {/* Left Side: Logo */}
                 <div className="flex shrink-0">
                     <Image
-                        src="/images/vibra.png"
+                        src="/assets/image/icon/vibra.png"
                         alt="Vibra Logo"
                         width={220}
                         height={55}
@@ -68,45 +68,37 @@ export default function Header() {
                     />
                 </div>
 
-                {/* Right Side: Auth Action or User Profile */}
+                {/* Right Side: User Profile */}
                 <div className="flex items-center">
-                    {!isLoggedIn ? (
-                        <button 
-                            onClick={() => router.push("/")}
-                            className={`bg-[#004415] text-white font-bold text-[14px] px-8 py-2.5 rounded-[4px] hover:bg-[#003310] transition-colors ${acuminProBold.className}`}
+                    <div className="relative" ref={menuRef}>
+                        <div 
+                            className="flex items-center gap-2 cursor-pointer group"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
                         >
-                            Login
-                        </button>
-                    ) : (
-                        <div className="relative" ref={menuRef}>
-                            <div 
-                                className="flex items-center gap-3 cursor-pointer group"
-                                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            >
-                                <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 border border-gray-100 shadow-sm group-hover:border-[#004415]/30 transition-all bg-gray-50">
-                                    <Image
-                                        src={userData?.fotoPerfil ? `${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "")}${userData.fotoPerfil}` : "/images/head.png"}
-                                        alt="Profile"
-                                        width={44}
-                                        height={44}
-                                        className="w-full h-full object-cover"
-                                    />
-                                </div>
-                                <div className="flex flex-col text-left">
-                                    <p className={`text-[12px] text-gray-700 leading-tight ${acuminProRegular.className}`}>
-                                        Olá, <span className="font-bold text-black group-hover:text-[#004415] transition-colors">Marcelo Almeida</span>
+                            <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border border-gray-200/50 shadow-sm group-hover:border-[#004415]/30 transition-all bg-white">
+                                <Image
+                                    src="/assets/image/icon/head.png"
+                                    alt="Profile"
+                                    width={40}
+                                    height={40}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            <div className="flex flex-col text-left">
+                                <p className={`text-[11px] text-gray-700 leading-tight ${acuminProRegular.className}`}>
+                                    Olá, <span className={`font-bold text-black group-hover:text-[#004415] transition-colors ${acuminProBold.className}`}>Marcelo Almeida</span>
+                                </p>
+                                <div className="flex items-center justify-start gap-1 mt-0.5">
+                                    <div className="w-3 h-3 rounded-full bg-[#FFD700] flex items-center justify-center text-[7px] font-black text-[#004415] shadow-[inset_0_0_1px_rgba(0,0,0,0.2)]">P</div>
+                                    <p className={`text-[11px] text-gray-600 font-medium leading-tight ${acuminProRegular.className}`}>
+                                        Você tem <span className={`font-bold text-[#004415] text-[12px] ${acuminProBold.className}`}>345.400 PTS</span>
                                     </p>
-                                    <div className="flex items-center justify-start gap-1 mt-1">
-                                        <div className="w-3.5 h-3.5 rounded-full bg-[#FFD700] border border-yellow-500 shadow-sm flex items-center justify-center text-[7px] font-black text-white">P</div>
-                                        <p className={`text-[12px] text-gray-700 font-medium leading-tight ${acuminProRegular.className}`}>
-                                            Você tem <span className="font-bold text-[#004415] text-[13px]">345.400 PTS</span>
-                                        </p>
-                                        <svg className={`w-3.5 h-3.5 text-[#004415] transition-transform duration-300 ${isMenuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
-                                        </svg>
-                                    </div>
+                                    <svg className={`w-2.5 h-2.5 text-[#004415] transition-transform duration-300 ml-0.5 ${isMenuOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M19 9l-7 7-7-7" />
+                                    </svg>
                                 </div>
                             </div>
+                        </div>
 
                             {/* Dropdown Menu */}
                             {isMenuOpen && (
@@ -115,7 +107,7 @@ export default function Header() {
                                     <div className="p-4 pb-3 flex items-start gap-4">
                                         <div className="w-[54px] h-[54px] rounded-full overflow-hidden border border-gray-100 shrink-0 bg-gray-50">
                                             <Image
-                                                src={userData?.fotoPerfil ? `${process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "")}${userData.fotoPerfil}` : "/images/head.png"}
+                                                src="/assets/image/icon/head.png"
                                                 alt="Profile Large"
                                                 width={54}
                                                 height={54}
@@ -151,7 +143,7 @@ export default function Header() {
                                                     <path d="M12 2L4 10l8 12 8-12-8-8z" />
                                                 </svg>
                                                 <p className={`text-[18px] font-bold text-[#001AFF] ${acuminProBold.className}`}>
-                                                    323.900 <span className="text-[9px] uppercase font-black tracking-widest text-[#001AFF] ml-0.5">Diamantes</span>
+                                                    {userData?.diamantes || userData?.diamonds || "323.900"} <span className="text-[9px] uppercase font-black tracking-widest text-[#001AFF] ml-0.5">Diamantes</span>
                                                 </p>
                                             </div>
                                             <p className="text-[10px] text-[#001AFF] font-bold underline cursor-pointer hover:text-blue-700 transition-colors inline-block ml-[28px]">O que são DIAMANTES?</p>
@@ -164,14 +156,14 @@ export default function Header() {
                                                 <svg className="w-5 h-5 text-[#FFD700]" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                                                 </svg>
-                                                <p className={`text-[22px] font-bold text-[#004415] ${acuminProBold.className}`}>Especialista</p>
+                                                <p className={`text-[22px] font-bold text-[#004415] ${acuminProBold.className}`}>{userData?.categoria || userData?.category || "Especialista"}</p>
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* Menu Buttons */}
                                     <div className="px-4 pb-2 space-y-2">
-                                        <button 
+                                        <button
                                             className="block w-full py-2.5 bg-[#F2F2F2] hover:bg-green-700 hover:text-white text-[#004415] text-[13px] font-bold text-center transition-colors rounded-[3px]"
                                             onClick={() => {
                                                 setIsMenuOpen(false);
@@ -190,7 +182,7 @@ export default function Header() {
 
                                     {/* Logout Action */}
                                     <div className="px-4 py-4">
-                                        <button 
+                                        <button
                                             onClick={handleLogout}
                                             className={`w-full py-2.5 border border-[#004415] text-[#004415] text-[14px] font-bold hover:bg-green-700 hover:text-white transition-all rounded-[3px] ${acuminProBold.className}`}
                                         >
@@ -200,7 +192,6 @@ export default function Header() {
                                 </div>
                             )}
                         </div>
-                    )}
                 </div>
             </div>
         </header>
