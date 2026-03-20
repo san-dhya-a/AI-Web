@@ -59,6 +59,12 @@ async function request<TRes = any>(
                 console.warn("[API] Failed to parse error response as JSON");
             }
 
+            if (response.status === 401 || response.status === 403) {
+                console.warn("[API] Unauthorized. Clearing session and redirecting.");
+                document.cookie = "auth_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+                window.location.href = "/";
+            }
+
             return Promise.reject({
                 status: response.status,
                 message: (errorData as any).message || response.statusText || "Request failed",

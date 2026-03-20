@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getCookie } from "@/utils/cookieUtils";
 
+import { GuestGuard } from "@/components/auth/Guardians";
+
 export default function RootPage() {
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false);
@@ -17,10 +19,12 @@ export default function RootPage() {
 
     if (!isMounted) return null;
     return (
-        <main className="min-h-screen flex flex-col">
-            <Hero />
-            <LoginSection />
-            <Footer />
-        </main>
+        <GuestGuard>
+            <main className="min-h-screen flex flex-col">
+                <Hero />
+                <LoginSection />
+                <Footer />
+            </main>
+        </GuestGuard>
     );
 }
