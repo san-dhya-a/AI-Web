@@ -259,7 +259,8 @@ export default function MinhaContaPage() {
                                         alt="Profile"
                                         width={130}
                                         height={130}
-                                        unoptimized={(previewUrl || profileImageUrl).startsWith('http') || (previewUrl || "").startsWith('blob:')}
+                                        unoptimized={true}
+                                        priority
                                         className={`w-full h-full object-cover transition-opacity duration-300 ${isUploading ? 'opacity-50' : 'opacity-100'}`}
                                     />
                                     {isUploading && (
