@@ -19,10 +19,12 @@ import { useRef } from "react";
 
 export default function MinhaContaPage() {
     const router = useRouter();
+    const [userData, setUserData] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [fetchError, setFetchError] = useState<string | null>(null);
     const [isMounted, setIsMounted] = useState(false);
     const [profileImageUrl, setProfileImageUrl] = useState<string>("/assets/image/icon/avatar.png");
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [isUploading, setIsUploading] = useState(false);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -62,83 +64,83 @@ export default function MinhaContaPage() {
         }
     });
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                if (isMounted) {
-                    const token = getCookie("auth_token");
-                    if (!token) {
-                        router.push("/");
-                        return;
-                    }
-                }
-                setIsLoading(true);
-                const response = await apiController.get(ENDPOINTS.GET_ACCOUNT);
-
-                if (response.data) {
-                    const userData = response.data;
-                    const splitPhone = (phone: string | null) => {
-                        if (!phone) return { ddd: "", number: "" };
-                        const cleaned = phone.replace(/\D/g, "");
-                        if (cleaned.length >= 10) {
-                            return {
-                                ddd: cleaned.substring(0, 2),
-                                number: cleaned.substring(2)
-                            };
-                        }
-                        return { ddd: "", number: cleaned };
-                    };
-
-                    const resTel = splitPhone(userData.telefone_residencial || userData.telefoneResidencial);
-                    const celTel = splitPhone(userData.telefone_celular || userData.telefoneCelular);
-
-                    const formValues = {
-                        cargo: userData.cargo || "PDV",
-                        nomeCompleto: userData.nome_completo || userData.nome_Completo || userData.nomeCompleto || userData.nomecompleto || "",
-                        cpfCnpj: userData.cpf_cnpj || userData.cpfCnpj || userData.cpf_Cnpj || userData.cpfcnpj || "",
-                        email: userData.email || userData.Email || "",
-                        cep: userData.cep || userData.Cep || "",
-                        endereco: userData.endereco || userData.Endereco || userData.logradouro || "",
-                        numero: userData.numero || userData.Numero || "",
-                        complemento: userData.complemento || userData.Complemento || "",
-                        uf: userData.uf || userData.Uf || userData.estado || "Rio de Janeiro",
-                        cidade: userData.cidade || userData.Cidade || "",
-                        bairro: userData.bairro || userData.Bairro || "",
-                        dddResidencial: resTel.ddd,
-                        telefoneResidencial: resTel.number,
-                        dddCelular: celTel.ddd,
-                        telefoneCelular: celTel.number,
-                        // Mapping for gender
-                        genero: userData.genero === "Feminino" ? "Mulher" : 
-                               userData.genero === "Masculino" ? "Homem" : 
-                               userData.genero === "Outro" ? "Outro" : 
-                               (userData.genero || "Homem"),
-                        // Ensure password fields are empty
-                        senhaAtual: "",
-                        novaSenha: "",
-                        confirmarNovaSenha: ""
-                    };
-                    reset(formValues);
-
-                    /* 
-                    // Set profile image from backend if available
-                    if (userData.fotoPerfil) {
-                        const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "");
-                        setProfileImageUrl(`${baseUrl}${userData.fotoPerfil}`);
-                    }
-                    */
-                }
-            } catch (err: any) {
-                console.error("[Profile Fetch Fatal Error]", err);
-                const errorMsg = err.message || (err.data && err.data.message) || "Falha ao carregar dados do usuário.";
-                setFetchError(errorMsg);
-            } finally {
-                setIsLoading(false);
+    const fetchUserData = async () => {
+        if (!isMounted) return;
+        
+        try {
+            const token = getCookie("auth_token");
+            if (!token) {
+                router.push("/");
+                return;
             }
-        };
 
-        fetchUserData();
-    }, [isMounted, reset, router]);
+            setIsLoading(true);
+            const response = await apiController.get(ENDPOINTS.GET_ACCOUNT);
+
+            if (response.success && response.data) {
+                const data = response.data;
+                setUserData(data);
+
+                const splitPhone = (phone: string | null) => {
+                    if (!phone) return { ddd: "", number: "" };
+                    const cleaned = phone.replace(/\D/g, "");
+                    if (cleaned.length >= 10) {
+                        return {
+                            ddd: cleaned.substring(0, 2),
+                            number: cleaned.substring(2)
+                        };
+                    }
+                    return { ddd: "", number: cleaned };
+                };
+
+                const resTel = splitPhone(data.telefone_residencial || data.telefoneResidencial);
+                const celTel = splitPhone(data.telefone_celular || data.telefoneCelular);
+
+                const formValues = {
+                    cargo: data.cargo || "PDV",
+                    nomeCompleto: data.nome_completo || data.nome_Completo || data.nomeCompleto || data.nomecompleto || "",
+                    cpfCnpj: data.cpf_cnpj || data.cpfCnpj || data.cpf_Cnpj || data.cpfcnpj || "",
+                    email: data.email || data.Email || "",
+                    cep: data.cep || data.Cep || "",
+                    endereco: data.endereco || data.Endereco || data.logradouro || "",
+                    numero: data.numero || data.Numero || "",
+                    complemento: data.complemento || data.Complemento || "",
+                    uf: data.uf || data.Uf || data.estado || "Rio de Janeiro",
+                    cidade: data.cidade || data.Cidade || "",
+                    bairro: data.bairro || data.Bairro || "",
+                    dddResidencial: resTel.ddd,
+                    telefoneResidencial: resTel.number,
+                    dddCelular: celTel.ddd,
+                    telefoneCelular: celTel.number,
+                    genero: data.genero === "Feminino" ? "Mulher" : 
+                           data.genero === "Masculino" ? "Homem" : 
+                           data.genero === "Outro" ? "Outro" : 
+                           (data.genero || "Homem"),
+                    senhaAtual: "",
+                    novaSenha: "",
+                    confirmarNovaSenha: ""
+                };
+                reset(formValues);
+
+                if (data.photo || data.fotoPerfil) {
+                    const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/api$/, "");
+                    setProfileImageUrl(`${baseUrl}${data.photo || data.fotoPerfil}`);
+                }
+            }
+        } catch (err: any) {
+            console.error("[Profile Fetch Error]", err);
+            setFetchError("Falha ao carregar dados do usuário.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        if (isMounted) {
+            fetchUserData();
+        }
+    }, [isMounted]);
+
 
     const onSubmit = async (data: MinhaContaFormData) => {
         setIsUploading(true);
@@ -178,7 +180,13 @@ export default function MinhaContaPage() {
             console.log("Sending unified multipart update...");
             await apiController.putForm(ENDPOINTS.UPDATE_ACCOUNT, formData);
             
-            console.log("Update successful, redirecting...");
+            console.log("Update successful, Updating UI state...");
+            if (previewUrl) {
+                setProfileImageUrl(previewUrl);
+                setPreviewUrl(null);
+                setSelectedFile(null);
+            }
+            
             router.push("/minha-conta/success");
         } catch (err: any) {
             console.error("Detailed API Error:", JSON.stringify(err, Object.getOwnPropertyNames(err), 2));
@@ -195,9 +203,9 @@ export default function MinhaContaPage() {
         // Store file for later submission
         setSelectedFile(file);
 
-        // Preview locally
-        const previewUrl = URL.createObjectURL(file);
-        setProfileImageUrl(previewUrl);
+        // Preview locally (Temporarily)
+        const objectUrl = URL.createObjectURL(file);
+        setPreviewUrl(objectUrl);
     };
 
     const handleEditPhotoClick = () => {
@@ -247,11 +255,11 @@ export default function MinhaContaPage() {
                                 <p className="text-[10px] font-bold text-[#004415] mb-8">* Campo Obrigatório</p>
                                 <div className="flex flex-col items-center shrink-0 relative w-[130px] h-[130px] rounded-full overflow-hidden bg-gray-200 shadow-sm border-2 border-white group">
                                     <Image
-                                        src={profileImageUrl}
+                                        src={previewUrl || profileImageUrl}
                                         alt="Profile"
                                         width={130}
                                         height={130}
-                                        unoptimized={profileImageUrl.startsWith('http')}
+                                        unoptimized={(previewUrl || profileImageUrl).startsWith('http') || (previewUrl || "").startsWith('blob:')}
                                         className={`w-full h-full object-cover transition-opacity duration-300 ${isUploading ? 'opacity-50' : 'opacity-100'}`}
                                     />
                                     {isUploading && (

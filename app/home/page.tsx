@@ -7,7 +7,6 @@ import Banner from "@/components/layout/banner";
 import Footer from "@/components/layout/footer";
 import { acuminProBold, acuminProRegular } from "@/app/fonts";
 import { getCookie } from "@/utils/cookieUtils";
-
 export default function HomePage() {
     const router = useRouter();
     const [isMounted, setIsMounted] = useState(false);

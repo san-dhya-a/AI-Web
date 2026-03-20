@@ -33,11 +33,14 @@ async function request<TRes = any>(
     try {
         // Add Authorization header if token exists
         const token = getCookie("auth_token");
-        if (token) {
+        if (token && token !== "undefined" && token !== "null" && typeof token === "string" && !token.startsWith("[object")) {
             options.headers = {
                 ...options.headers,
-                "Authorization": `Bearer ${token}`,
+                "Authorization": token.startsWith("Bearer ") ? token : `Bearer ${token}`,
             };
+            console.log(`[API Auth] Sending token: ${token.substring(0, 10)}... (Type: ${typeof token})`);
+        } else if (token) {
+            console.warn(`[API Auth] Ignoring potentially malformed token: ${token} (Type: ${typeof token})`);
         }
 
         console.log(`[API Request] ${options.method} ${url}`, { headers: options.headers });

@@ -15,7 +15,7 @@ export default function Banner({
         <>
             {/* Nav Row */}
             <div className="bg-[#f2f2f2] sticky top-[95px] z-40" suppressHydrationWarning>
-                <div className="max-w-[1100px] mx-auto px-6 h-[40px] flex items-center justify-end gap-10">
+                <div className="max-w-[1100px] mx-auto px-6 h-[45px] flex items-center justify-end gap-10">
                     {/* Navigation */}
                     <nav>
                         <ul className={`flex items-center gap-6 text-[11px] font-bold text-[#004415] ${acuminProBold.className}`}>
@@ -71,15 +71,15 @@ export default function Banner({
                                 </svg>
                             </button>
                         </div>
-                        <button className="relative hover:opacity-80 transition-opacity text-gray-500 bg-white p-1 rounded-full border border-gray-100 shadow-sm">
+                        <button className="relative hover:opacity-80 transition-opacity text-[#666666] bg-white p-1.5 rounded-full border border-gray-100 shadow-sm flex items-center justify-center">
                             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                             </svg>
-                            <span className="absolute top-[3px] right-[3px] w-[4px] h-[4px] bg-red-500 rounded-full border border-white"></span>
+                            <span className="absolute top-[2px] right-[2px] w-[5px] h-[5px] bg-[#FF0000] rounded-full border border-white"></span>
                         </button>
-                        <button className="hover:opacity-80 transition-opacity text-gray-500 bg-white p-1 rounded-full border border-gray-100 shadow-sm">
+                        <button className="hover:opacity-80 transition-opacity text-[#666666] bg-white p-1.5 rounded-full border border-gray-100 shadow-sm flex items-center justify-center">
                             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
                         </button>
                     </div>
