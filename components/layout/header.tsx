@@ -39,7 +39,7 @@ export default function Header() {
                         width={220}
                         height={55}
                         className="h-12 w-auto cursor-pointer"
-                        onClick={() => router.push("/home")}
+                        onClick={() => router.push("/")}
                     />
                 </div>
 

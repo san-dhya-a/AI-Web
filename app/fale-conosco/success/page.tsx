@@ -27,7 +27,7 @@ export default function FaleConoscoSuccessPage() {
                 <SuccessView
                     topText="A SUA MENSAGEM FOI"
                     bottomText="ENVIADA COM SUCESSO!"
-                    backHref="/home"
+                    backHref="/"
                 />
                 <Footer />
             </div>

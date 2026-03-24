@@ -24,7 +24,7 @@ export default function MinhaContaSuccessPage() {
                 <SuccessView
                     topText="A SUA CONTA FOI"
                     bottomText="ATUALIZADA COM SUCESSO!"
-                    backHref="/home"
+                    backHref="/"
                 />
                 <Footer />
             </div>

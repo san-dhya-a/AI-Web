@@ -1,12 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Header from "@/components/layout/header";
 import Banner from "@/components/layout/banner";
 import Footer from "@/components/layout/footer";
 import { acuminProBold, acuminProRegular } from "@/app/fonts";
-import { getCookie } from "@/utils/cookieUtils";
 import { AuthGuard } from "@/components/auth/Guardians";
 
 export default function HomePage() {

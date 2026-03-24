@@ -49,7 +49,7 @@ export default function LoginSection() {
                 setCookie("auth_token", response.data.token, 1);
             }
 
-            router.push("/home");
+            router.push("/");
         } catch (err: any) {
             setError(err.message || "Falha ao realizar login. Verifique suas credenciais.");
         } finally {
@@ -58,9 +58,9 @@ export default function LoginSection() {
     };
 
     return (
-        <section className="bg-[#f2f2f2] py-12 md:py-20">
+        <section className="bg-[#f2f2f2] pt-4 pb-16 md:pt-6 md:pb-8">
             <div className="container max-w-6xl mx-auto px-6 lg:px-12">
-                <div className="grid grid-cols-1 lg:grid-cols-[1.27fr_1fr] gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="max-w-[400px] w-full lg:pr-8">
                         <h3 className="text-[#004415] font-bold text-[13px] mb-8 uppercase">
                             Faça o login abaixo para começar:
@@ -126,36 +126,38 @@ export default function LoginSection() {
                     </div>
 
                     {/* Right side - App Download */}
-                    <div className="flex items-center gap-6 lg:justify-end w-full">
-                        <div className="flex flex-col items-center lg:items-start gap-6 text-[#004415] text-center lg:text-left mt-0">
-                            <h3 className={`text-[#004415] text-[34px] xl:text-[40px] font-bold leading-[1.05] not-italic ${acuminProBold.className}`}>
-                                Baixe agora o<br />app do Bora!
-                            </h3>
-                            <div className="flex flex-col gap-3 items-center lg:items-start">
+                    <div className="flex items-center justify-end w-full">
+                        <div className="flex items-center gap-8 lg:gap-10">
+                            <div className="flex flex-col items-end gap-5 text-[#004415] text-right mt-15 lg:mt-25">
+                                <h3 className={`text-[#004415] text-[24px] xl:text-[28px] font-bold leading-[1.0] not-italic ${acuminProBold.className}`}>
+                                    Baixe<br />agora o<br />app do<br />Bora!
+                                </h3>
+                                <div className="flex flex-col gap-3 items-end">
+                                    <Image
+                                        src="/assets/image/icon/icon1.png"
+                                        alt="Google Play"
+                                        width={110}
+                                        height={34}
+                                        className="h-[36px] w-auto cursor-pointer"
+                                    />
+                                    <Image
+                                        src="/assets/image/icon/icon2.png"
+                                        alt="App Store"
+                                        width={110}
+                                        height={34}
+                                        className="h-[36px] w-auto cursor-pointer"
+                                    />
+                                </div>
+                            </div>
+                            <div className="relative hidden sm:block">
                                 <Image
-                                    src="/assets/image/icon/icon1.png"
-                                    alt="Google Play"
-                                    width={140}
-                                    height={42}
-                                    className="h-11 w-auto cursor-pointer"
-                                />
-                                <Image
-                                    src="/assets/image/icon/icon2.png"
-                                    alt="App Store"
-                                    width={140}
-                                    height={42}
-                                    className="h-11 w-auto cursor-pointer"
+                                    src="/assets/image/banner/img2.png"
+                                    alt="Mobile App"
+                                    width={260}
+                                    height={520}
+                                    className="w-[180px] lg:w-[220px] xl:w-[250px] drop-shadow-2xl"
                                 />
                             </div>
-                        </div>
-                        <div className="relative pl-6 hidden sm:block">
-                            <Image
-                                src="/assets/image/banner/img2.png"
-                                alt="Mobile App"
-                                width={260}
-                                height={520}
-                                className="w-[200px] lg:w-[240px] xl:w-[280px] drop-shadow-xl"
-                            />
                         </div>
                     </div>
                 </div>

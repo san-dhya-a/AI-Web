@@ -20,7 +20,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
             const token = getCookie("auth_token");
             if (!token) {
                 console.log("[AuthGuard] No token found, redirecting to login");
-                router.replace("/");
+                router.replace("/login");
                 return;
             }
 
@@ -37,7 +37,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
                 if (err.status === 401 || err.status === 403) {
                     eraseCookie("auth_token");
                     eraseCookie("user_id");
-                    router.replace("/");
+                    router.replace("/login");
                 } else {
                     // System error, let it be for now or handle accordingly
                     setIsAuthorized(true); // Fallback to assume valid if it's a network error
@@ -72,7 +72,7 @@ export function GuestGuard({ children }: { children: React.ReactNode }) {
             const token = getCookie("auth_token");
             if (token) {
                 console.log("[GuestGuard] Token found, redirecting to home");
-                router.replace("/home");
+                router.replace("/");
                 return;
             }
             setIsGuest(true);
