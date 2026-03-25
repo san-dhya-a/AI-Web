@@ -404,5 +404,3 @@ export default function RegisterPage() {
         </GuestGuard>
     );
 }
-);
-}
