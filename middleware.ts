@@ -3,29 +3,39 @@ import type { NextRequest } from 'next/server';
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  console.log(`[Middleware] Processing request for: ${pathname}`);
   const token = request.cookies.get('auth_token')?.value;
 
-  // Guest Routes: Pages that should ONLY be seen by logged-out users
-  const isGuestRoute = pathname === '/login' || pathname === '/register';
-  
-  // App Routes: Pages that should ONLY be seen by logged-in users
-  const isAppRoute = pathname === '/' ||
-                     pathname.startsWith('/home') || 
-                     pathname.startsWith('/minha-conta') || 
-                     pathname.startsWith('/fale-conosco/success');
+  console.log(`[Middleware] ${token ? 'Authenticated' : 'Guest'} access to: ${pathname}`);
 
-  // 2. If user is NOT authenticated and tries to access protected app routes, redirect to login
-  if (!token && isAppRoute) {
-    // If it's already /login, don't redirect again
-    if (pathname === '/login') return NextResponse.next();
+  // 1. Define Public Routes (accessible without token)
+  const isPublicRoute = pathname === '/login' || pathname === '/register';
+
+  // 2. If user is NOT authenticated and tries to access ANY route that is NOT public, redirect to login
+  if (!token && !isPublicRoute) {
+    console.log(`[Middleware] Unauthorized access to ${pathname}. Redirecting to /login`);
     return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  // 3. (Optional) If user IS authenticated, don't let them see login/register
+  if (token && isPublicRoute) {
+    console.log(`[Middleware] Authenticated user on ${pathname}. Redirecting to /home`);
+    return NextResponse.redirect(new URL('/home', request.url));
   }
 
   return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
+// Ensure middleware runs on all application paths while excluding system files and assets
 export const config = {
-  matcher: ['/', '/login', '/register', '/home/:path*', '/minha-conta/:path*', '/fale-conosco/success'],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - images (public images folder)
+     */
+    '/((?!api|_next/static|_next/image|favicon.ico|images).*)',
+  ],
 };
