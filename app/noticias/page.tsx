@@ -42,7 +42,7 @@ export default function NoticiasPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Featured News (Top 2) */}
                     {newsData.filter(item => item.isFeatured).map((item) => (
-                        <Link href={`/noticias/detalhe?id=${item.id}`} key={item.id} className="md:col-span-2 relative h-[320px] group overflow-hidden block">
+                        <Link href={`/noticias/detalhe?id=${item.id}`} key={item.id} className="md:col-span-2 relative h-[320px] group overflow-hidden block shadow-lg">
                             <Image
                                 src={item.image}
                                 alt={item.title}
