@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Header from "@/components/layout/header";
-import Banner from "@/components/layout/banner";
+import BannerNews from "@/components/layout/banner-news";
 import Footer from "@/components/layout/footer";
 import Image from "next/image";
 import { useForm, Controller } from "react-hook-form";
@@ -234,7 +234,7 @@ export default function MinhaContaPage() {
                 suppressHydrationWarning
             >
                 <Header />
-                <Banner />
+                <BannerNews />
 
                 <main className="flex-1 bg-white">
                     {!isMounted || isLoading ? (

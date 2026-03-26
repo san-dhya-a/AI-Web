@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import Banner from "@/components/layout/banner";
+import BannerNews from "@/components/layout/banner-news";
 
 interface FAQItem {
     id: string;
@@ -174,7 +174,7 @@ export default function FAQPage() {
     return (
         <div className="bg-white min-h-screen flex flex-col font-sans">
             <Header />
-            <Banner title="FAQ" subtitle="" />
+            <BannerNews title="FAQ" subtitle="" />
 
             <main className="flex-1 w-full max-w-[1100px] mx-auto px-6 py-12 md:py-16">
                 <div>

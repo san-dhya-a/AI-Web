@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import Banner from "@/components/layout/banner";
+import BannerNews from "@/components/layout/banner-news";
 import Image from "next/image";
 import Link from "next/link";
 import { acuminProBold, acuminProRegular, acuminCondBlackItalic } from "@/app/fonts";
@@ -16,7 +16,7 @@ export default function NoticiasPage() {
     return (
         <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`}>
             <Header />
-            <Banner
+            <BannerNews
                 title="NOTÍCIAS"
                 subtitle="FIQUE POR DENTRO DO QUE INTERESSA"
                 backgroundImage="/images/banner1.png"
@@ -54,23 +54,27 @@ export default function NoticiasPage() {
                                 {item.date}
                             </div>
                             <div className="absolute bottom-10 left-8 right-8">
-                                <h2 className={`text-white text-[28px] md:text-[34px] leading-[0.9] font-black uppercase italic ${acuminCondBlackItalic.className}`}>
+                                <h2 className={`text-white text-[28px] md:text-[34px] leading-[0.9] font-black hover:underline ${acuminProBold.className}`}>
                                     {item.title}
                                 </h2>
                             </div>
                         </Link>
                     ))}
-                    {/* Regular News */}
+                    {/* Regular News (Bottom 6) */}
                     {newsData.filter(item => !item.isFeatured).map((item) => (
-                        <div key={item.id} className="flex flex-col group border border-gray-100 pb-10 shadow-sm hover:shadow-md transition-shadow bg-white">
-                            <Link href={`/noticias/detalhe?id=${item.id}`} className="relative h-[160px] overflow-hidden mb-6 block">
+                        <Link 
+                            key={item.id} 
+                            href={`/noticias/detalhe?id=${item.id}`} 
+                            className="flex flex-col group border border-gray-100 pb-10 shadow-sm hover:shadow-md transition-shadow bg-white block"
+                        >
+                            <div className="relative h-[160px] overflow-hidden mb-6 block">
                                 <Image
                                     src={item.image}
                                     alt={item.title}
                                     fill
                                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
-                            </Link>
+                            </div>
                             <div className="px-6 flex flex-col items-start gap-4">
                                 <div className="bg-[#f2f2f2] text-[#004415] text-[10px] px-2 py-1 font-bold uppercase tracking-wider">
                                     {item.date}
@@ -79,7 +83,7 @@ export default function NoticiasPage() {
                                     {item.title}
                                 </h3>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </main>

@@ -49,7 +49,7 @@ export default function LoginSection() {
                 setCookie("auth_token", response.data.token, 1);
             }
 
-            router.push("/");
+            router.push("/home");
         } catch (err: any) {
             setError(err.message || "Falha ao realizar login. Verifique suas credenciais.");
         } finally {

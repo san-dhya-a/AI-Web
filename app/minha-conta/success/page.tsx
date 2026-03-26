@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/layout/header";
-import Banner from "@/components/layout/banner";
+import BannerNews from "@/components/layout/banner-news";
 import Footer from "@/components/layout/footer";
 import SuccessView from "@/components/success/success-view";
 import { useState, useEffect } from "react";
@@ -20,7 +20,7 @@ export default function MinhaContaSuccessPage() {
         <AuthGuard>
             <div className="bg-white font-sans">
                 <Header />
-                <Banner />
+                <BannerNews />
                 <SuccessView
                     topText="A SUA CONTA FOI"
                     bottomText="ATUALIZADA COM SUCESSO!"

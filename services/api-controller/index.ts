@@ -60,9 +60,7 @@ async function request<TRes = any>(
             }
 
             if (response.status === 401 || response.status === 403) {
-                console.warn("[API] Unauthorized. Clearing session and redirecting.");
-                document.cookie = "auth_token=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-                window.location.href = "/";
+                console.warn("[API] Unauthorized. Session validation will be handled by UI guards.");
             }
 
             return Promise.reject({

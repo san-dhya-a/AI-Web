@@ -20,7 +20,6 @@ export const newsData: NewsItem[] = [
         date: "12/02/2025",
         title: "Liderança muda de mãos, mas Time Lubrax segue no topo da tabela",
         image: "/images/card2.png",
-        detailImage: "/images/banner 2.png",
         isFeatured: true,
     },
     {
@@ -51,12 +50,12 @@ export const newsData: NewsItem[] = [
         id: 7,
         date: "12/02/2025",
         title: "Lubrax é o lubrificante mais lembrado no Top Of Mind 2021",
-        image: "/images/img5.png",
+        image: "/images/img5.jpg",
     },
     {
         id: 8,
         date: "12/02/2025",
         title: "Time Lubrax volta a Buenos Aires de olho na liderança do campeonato",
-        image: "/images/img6.png",
+        image: "/images/img6.jpeg",
     },
 ];

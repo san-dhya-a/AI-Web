@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import Banner from "@/components/layout/banner";
+import BannerNews from "@/components/layout/banner-news";
 import { acuminProBold, acuminProRegular } from "@/app/fonts";
 
 const sections = [
@@ -34,7 +34,7 @@ export default function RegulamentoPage() {
     return (
         <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`}>
             <Header />
-            <Banner
+            <BannerNews
                 title="REGULAMENTO"
                 subtitle="Consulte as regras e condições de participação do programa."
             />

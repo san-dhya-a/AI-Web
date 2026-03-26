@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Header from "@/components/layout/header";
-import Banner from "@/components/layout/banner";
+import BannerNews from "@/components/layout/banner-news";
 import Footer from "@/components/layout/footer";
 import { acuminProBold, acuminProRegular } from "@/app/fonts";
 import { AuthGuard } from "@/components/auth/Guardians";
@@ -20,7 +20,7 @@ export default function HomePage() {
         <AuthGuard>
             <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`} suppressHydrationWarning>
                 <Header />
-                <Banner 
+                <BannerNews 
                     title="Bem-vindo" 
                     subtitle="Esta é a sua página inicial temporária. Você está logado com sucesso." 
                 />

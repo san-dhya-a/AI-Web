@@ -1,14 +1,10 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function proxy(request: NextRequest) {
-  const token = request.cookies.get('auth_token')?.value;
+export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  // 0. Redirect /home to / (internal route masking)
-  if (pathname === '/home') {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
+  console.log(`[Middleware] Processing request for: ${pathname}`);
+  const token = request.cookies.get('auth_token')?.value;
 
   // Guest Routes: Pages that should ONLY be seen by logged-out users
   const isGuestRoute = pathname === '/login' || pathname === '/register';
@@ -18,11 +14,6 @@ export function proxy(request: NextRequest) {
                      pathname.startsWith('/home') || 
                      pathname.startsWith('/minha-conta') || 
                      pathname.startsWith('/fale-conosco/success');
-
-  // 1. If user is authenticated and tries to access guest routes, redirect to root home (/)
-  if (token && isGuestRoute) {
-    return NextResponse.redirect(new URL('/', request.url));
-  }
 
   // 2. If user is NOT authenticated and tries to access protected app routes, redirect to login
   if (!token && isAppRoute) {

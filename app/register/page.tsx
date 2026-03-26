@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Header from "@/components/layout/header";
-import Banner from "@/components/layout/banner";
+import BannerNews from "@/components/layout/banner-news";
 import Footer from "@/components/layout/footer";
 import Image from "next/image";
 import { useForm, Controller } from "react-hook-form";
@@ -105,7 +105,7 @@ export default function RegisterPage() {
         <GuestGuard>
             <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`} suppressHydrationWarning>
                 <Header />
-                <Banner title="Register" subtitle="Crie sua conta para começar" />
+                <BannerNews title="Register" subtitle="Crie sua conta para começar" />
 
                 <main className="flex-1 bg-white">
                     <form onSubmit={handleSubmit(onSubmit, onError)} className="max-w-[1100px] mx-auto px-6 py-10">

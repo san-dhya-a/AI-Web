@@ -33,14 +33,21 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
                     throw new Error("Invalid session");
                 }
             } catch (err: any) {
-                console.error("[AuthGuard] Token validation failed:", err);
-                if (err.status === 401 || err.status === 403) {
+                console.error("[AuthGuard] Token validation failed:", {
+                    status: err.status,
+                    message: err.message,
+                    data: err.data
+                });
+                
+                // If it's a 401/403 or if the message indicates invalid session, clear cookies and redirect
+                if (err.status === 401 || err.status === 403 || (err.message && err.message.toLowerCase().includes("invalid"))) {
                     eraseCookie("auth_token");
                     eraseCookie("user_id");
                     router.replace("/login");
                 } else {
-                    // System error, let it be for now or handle accordingly
-                    setIsAuthorized(true); // Fallback to assume valid if it's a network error
+                    // Force redirect to login for any validation failure now, 
+                    // unless we want to allow offline mode (not recommended for strict security)
+                    router.replace("/login");
                 }
             }
         };
@@ -71,9 +78,7 @@ export function GuestGuard({ children }: { children: React.ReactNode }) {
         const checkGuest = () => {
             const token = getCookie("auth_token");
             if (token) {
-                console.log("[GuestGuard] Token found, redirecting to home");
-                router.replace("/");
-                return;
+                console.log("[GuestGuard] Token found, but staying on guest page per requirement");
             }
             setIsGuest(true);
         };

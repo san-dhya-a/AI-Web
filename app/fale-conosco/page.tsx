@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
-import Banner from "@/components/layout/banner";
+import BannerNews from "@/components/layout/banner-news";
 import { acuminProBold, acuminProRegular } from "@/app/fonts";
 import { contactSchema, type ContactFormData } from "@/services/form-controller/schemas";
 import { apiController } from "@/services/api-controller";
@@ -73,7 +73,7 @@ export default function FaleConoscoPage() {
     return (
         <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`}>
             <Header />
-            <Banner title="FALE CONOSCO" subtitle="" />
+            <BannerNews title="FALE CONOSCO" subtitle="" />
 
             <main className="flex-1 w-full bg-white">
                 <div className="w-full max-w-[1100px] mx-auto px-6 py-8 md:py-12">
@@ -211,7 +211,6 @@ export default function FaleConoscoPage() {
                     </form>
                 </div>
             </main>
-
             <Footer />
         </div>
     );

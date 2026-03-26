@@ -18,10 +18,15 @@ export const getCookie = (name: string) => {
     for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
         while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        if (c.indexOf(nameEQ) === 0) {
+            const val = c.substring(nameEQ.length, c.length);
+            if (val === "undefined" || val === "null" || val === "") return null;
+            return val;
+        }
     }
     return null;
 };
 export const eraseCookie = (name: string) => {
+    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=Strict;';
     document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
