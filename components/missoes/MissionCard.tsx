@@ -48,7 +48,7 @@ export default function MissionCard({
         >
             <div className={`${isLarge ? 'p-10' : 'p-8'} flex flex-col flex-grow`}>
                 {/* Badge Area with fixed height to maintain title alignment */}
-                <div className={`${isLarge ? 'h-[40px] mb-4' : 'h-[32px] mb-2'}`}>
+                <div>
                     {isNew && (
                         <div className={`${badgeStyles} w-fit transition-colors duration-300 text-[9px] font-bold px-1.5 py-0.5 rounded-none inline-block`}>
                             Missão Nova!
