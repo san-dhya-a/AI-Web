@@ -4,9 +4,9 @@ import { acuminProBold, acuminProRegular } from "@/app/fonts";
 
 export default function MissionInfo() {
     return (
-        <section className="pb-8 bg-white">
+        <section className="pb-4 bg-white">
             <div className="container max-w-[1100px] mx-auto px-6">
-                <div className="bg-white p-8 border border-gray-100 shadow-sm transition-all duration-300 hover:border-[#369c1f]">
+                <div className="bg-[#F2F2F2] p-8 border border-gray-100 shadow-sm transition-all duration-300 hover:border-[#369c1f]">
                     <h2 className={`${acuminProBold.className} text-[18px] text-[#004415] mb-2 font-black`}>
                         O que são Missões?
                     </h2>
