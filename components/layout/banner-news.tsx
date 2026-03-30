@@ -46,10 +46,10 @@ export default function BannerNews({
                                         </svg>
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link href="#" className="hover:opacity-80 transition-opacity flex items-center gap-1">
+                                <li className="relative group/campanhas">
+                                    <Link href="#" className="hover:text-[#369c1f] transition-colors flex items-center gap-1">
                                         Campanhas
-                                        <svg className="w-[10px] h-[10px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-[10px] h-[10px] transform group-hover/campanhas:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </Link>
@@ -81,6 +81,11 @@ export default function BannerNews({
                                             </li>
                                         </ul>
                                     </div>
+                                </li>
+                                <li>
+                                    <Link href="/missoes" className="hover:opacity-80 transition-opacity">
+                                        Missões
+                                    </Link>
                                 </li>
                                 <li>
                                     <Link href="#" className="hover:opacity-80 transition-opacity">
