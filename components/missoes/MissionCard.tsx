@@ -50,7 +50,7 @@ export default function MissionCard({
                 {/* Badge Area with fixed height to maintain title alignment */}
                 <div>
                     {isNew && (
-                        <div className={`${badgeStyles} w-fit transition-colors duration-300 text-[9px] font-bold px-1.5 py-0.5 rounded-none inline-block`}>
+                        <div className={`${badgeStyles} w-fit transition-colors duration-300 group-hover:bg-[#369c1f] group-hover:text-white text-[9px] font-bold px-1.5 py-0.5 rounded-none inline-block mb-5`}>
                             Missão Nova!
                         </div>
                     )}
@@ -86,7 +86,7 @@ export default function MissionCard({
 
                     <Button
                         fullWidth
-                        className={`${buttonVariant === 'bright' ? 'bg-[#369c1f] hover:bg-[#2d821a]' : 'bg-[#004415] hover:bg-[#369c1f]'} text-white font-bold transition-colors duration-300 ${isLarge ? 'py-3.5 text-[18px]' : 'py-3 text-[16px]'} rounded-none tracking-tighter shadow-none border-none`}
+                        className={`${buttonVariant === 'bright' ? 'bg-[#369c1f] hover:bg-[#2d821a]' : 'bg-[#004415] hover:bg-[#369c1f] group-hover:bg-[#369c1f]'} text-white font-bold transition-colors duration-300 ${isLarge ? 'py-3.5 text-[18px]' : 'py-3 text-[16px]'} rounded-none tracking-tighter shadow-none border-none`}
                     >
                         Quero participar!
                     </Button>

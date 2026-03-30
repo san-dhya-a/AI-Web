@@ -3,7 +3,8 @@ import type { NextRequest } from 'next/server';
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const token = request.cookies.get('auth_token')?.value;
+  const tokenValue = request.cookies.get('auth_token')?.value;
+  const token = (tokenValue && tokenValue !== "undefined" && tokenValue !== "null" && tokenValue !== "") ? tokenValue : null;
 
   console.log(`[Middleware] ${token ? 'Authenticated' : 'Guest'} access to: ${pathname}`);
 
@@ -20,6 +21,11 @@ export default function middleware(request: NextRequest) {
   if (token && isPublicRoute) {
     console.log(`[Middleware] Authenticated user on ${pathname}. Redirecting to /home`);
     return NextResponse.redirect(new URL('/home', request.url));
+  }
+
+  // Redirect root to /home if authenticated, else /login
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL(token ? '/home' : '/login', request.url));
   }
 
   return NextResponse.next();
