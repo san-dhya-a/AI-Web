@@ -48,7 +48,7 @@ const STATS_DATA = [
 
 export default function MissionStats() {
     return (
-        <section className="py-8 bg-transparent">
+        <section className="py-8 bg-white">
             <div className="container max-w-[1100px] mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                     {STATS_DATA.map((stat, index) => (

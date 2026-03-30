@@ -29,7 +29,7 @@ export default function BannerNews({
     }
 
     return (
-        <div className="sticky top-[95px] z-40 bg-white">
+        <div className="relative bg-white">
             {/* Unified Background Section */}
             <div className="bg-[#f2f2f2] w-full border-b border-gray-100">
                 <div className="max-w-[1070px] mx-auto">

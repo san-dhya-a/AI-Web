@@ -12,7 +12,7 @@ import { AuthGuard } from "@/components/auth/Guardians";
 export default function MissoesPage() {
     return (
         <AuthGuard>
-            <div className="min-h-screen flex flex-col bg-[#f2f2f2]">
+            <div className="min-h-screen flex flex-col bg-white">
                 <Header />
                 <BannerNews 
                     title="MISSÕES" 
