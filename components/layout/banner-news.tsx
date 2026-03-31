@@ -12,14 +12,15 @@ interface BannerProps {
     categoryName?: string;
     isMounted?: boolean;
     backgroundImage?: string;
+    bannerColor?: string;
 }
-
 export default function BannerNews({
     title = "MINHA CONTA",
     subtitle = "Consulte e edite os seus dados se for necessário.",
     sectionName,
     categoryName,
     backgroundImage,
+    bannerColor,
 }: BannerProps) {
     const [mounted, setMounted] = useState(false);
 
@@ -143,7 +144,11 @@ export default function BannerNews({
                                     className="object-cover"
                                     priority
                                 />
-                                <div className="absolute inset-0 bg-[#004415]/70"></div> 
+                                <div
+                                    className="absolute inset-0 mix-blend-multiply"
+                                    style={{ backgroundColor: bannerColor || '#268200' }}
+                                ></div>
+                                <div className="absolute inset-0 bg-black/5"></div>
                             </div>
                         )}
                         <div className="relative z-10 h-full flex flex-col justify-center text-left px-8 md:px-12">

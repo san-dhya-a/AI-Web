@@ -32,11 +32,11 @@ export default function MissionDetailPage() {
 
                 <Header />
 
-                <BannerNews 
+                <BannerNews
                     sectionName="MISSÕES"
                     categoryName="INTERNO"
-                    title="MISSÕES" 
-                    subtitle="PARTICIPE E GANHE PONTOS EXTRAS!" 
+                    title="MISSÕES"
+                    subtitle="PARTICIPE E GANHE PONTOS EXTRAS!"
                     backgroundImage="/images/missoesbanner.png"
                 />
 
@@ -59,10 +59,10 @@ export default function MissionDetailPage() {
 
                             {/* Banner Image */}
                             <div className="relative w-full h-[380px] mb-8 overflow-hidden border border-gray-100 shadow-sm">
-                                <Image 
-                                    src={mission?.bannerImage || "/images/banner 2.png"} 
-                                    alt={displayTitle} 
-                                    fill 
+                                <Image
+                                    src={mission?.bannerImage || "/images/banner 2.png"}
+                                    alt={displayTitle}
+                                    fill
                                     className="object-cover"
                                     priority
                                 />
@@ -132,17 +132,17 @@ export default function MissionDetailPage() {
 
                             {/* Action Bar */}
                             <div className="mt-16 flex flex-wrap gap-4 border-t border-gray-100 pt-10">
-                                <Link 
-                                    href="/missoes" 
+                                <Link
+                                    href="/missoes"
                                     className={`${acuminProBold.className} bg-[#f2f2f2] text-[#004415] px-12 py-3.5 text-[15px] hover:bg-gray-200 transition-colors flex items-center gap-2`}
                                 >
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
                                     Voltar
                                 </Link>
-                                
+
                                 <div className="ml-auto flex flex-wrap gap-4">
                                     <button className={`${acuminProBold.className} bg-[#f2f2f2] text-[#004415] px-8 py-3.5 text-[15px] hover:bg-gray-200 transition-colors flex items-center gap-2`}>
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg>
                                         Anexar Arquivo
                                     </button>
                                     <button className={`${acuminProBold.className} bg-[#004415] text-white px-8 py-3.5 text-[15px] hover:bg-[#369c1f] transition-colors`}>

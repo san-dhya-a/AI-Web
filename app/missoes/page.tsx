@@ -14,12 +14,12 @@ export default function MissoesPage() {
         <AuthGuard>
             <div className="min-h-screen flex flex-col bg-white">
                 <Header />
-                <BannerNews 
-                    title="MISSÕES" 
-                    subtitle="PARTICIPE E GANHE PONTOS EXTRAS!" 
+                <BannerNews
+                    title="MISSÕES"
+                    subtitle="PARTICIPE E GANHE PONTOS EXTRAS!"
                     backgroundImage="/images/missoesbanner.png"
                 />
-                
+
                 <main className="flex-grow">
                     <MissionStats />
                     <MissionInfo />
