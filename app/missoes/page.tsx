@@ -18,7 +18,6 @@ export default function MissoesPage() {
                     title="MISSÕES" 
                     subtitle="PARTICIPE E GANHE PONTOS EXTRAS!" 
                     backgroundImage="/images/missoesbanner.png"
-                    variant="vibrant"
                 />
                 
                 <main className="flex-grow">
