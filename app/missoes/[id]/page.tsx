@@ -29,14 +29,12 @@ export default function MissionDetailPage() {
     return (
         <AuthGuard>
             <div className="min-h-screen flex flex-col bg-white">
-                {/* Dummy message above banner section */}
-                <div className="bg-white px-6 py-2">
-                    <span className="text-[14px] text-gray-400">Missões.Interno</span>
-                </div>
 
                 <Header />
 
                 <BannerNews 
+                    sectionName="MISSÕES"
+                    categoryName="INTERNO"
                     title="MISSÕES" 
                     subtitle="PARTICIPE E GANHE PONTOS EXTRAS!" 
                     backgroundImage="/images/missoesbanner.png"

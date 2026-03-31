@@ -21,6 +21,8 @@ export default function FaleConoscoSuccessPage() {
             <div className="bg-white min-h-screen flex flex-col font-sans">
                 <Header />
                 <BannerNews
+                    sectionName="HOME"
+                    categoryName="FALE CONOSCO"
                     title="FALE CONOSCO"
                     subtitle="Dúvidas, críticas ou sugestões? Entre em contato conosco."
                 />

@@ -174,7 +174,7 @@ export default function FAQPage() {
     return (
         <div className="bg-white min-h-screen flex flex-col font-sans">
             <Header />
-            <BannerNews title="FAQ" subtitle="" />
+            <BannerNews sectionName="HOME" categoryName="FAQ" title="FAQ" subtitle="TIRE SUAS DÚVIDAS SOBRE O PROGRAMA" />
 
             <main className="flex-1 w-full max-w-[1100px] mx-auto px-6 py-12 md:py-16">
                 <div>

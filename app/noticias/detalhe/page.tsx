@@ -118,6 +118,8 @@ export default function NoticiaDetalhePage() {
         <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`}>
             <Header />
             <BannerNews
+                sectionName="NOTÍCIAS"
+                categoryName="INTERNO"
                 title="NOTÍCIAS"
                 subtitle="FIQUE POR DENTRO DO QUE INTERESSA"
                 backgroundImage="/images/banner1.png"

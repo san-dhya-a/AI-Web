@@ -105,7 +105,12 @@ export default function RegisterPage() {
         <GuestGuard>
             <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`} suppressHydrationWarning>
                 <Header />
-                <BannerNews title="Register" subtitle="Crie sua conta para começar" />
+                <BannerNews 
+                    sectionName="HOME" 
+                    categoryName="REGISTER" 
+                    title="Register" 
+                    subtitle="Crie sua conta para começar" 
+                />
 
                 <main className="flex-1 bg-white">
                     <form onSubmit={handleSubmit(onSubmit, onError)} className="max-w-[1100px] mx-auto px-6 py-10">

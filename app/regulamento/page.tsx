@@ -35,6 +35,8 @@ export default function RegulamentoPage() {
         <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`}>
             <Header />
             <BannerNews
+                sectionName="HOME"
+                categoryName="REGULAMENTO"
                 title="REGULAMENTO"
                 subtitle="Consulte as regras e condições de participação do programa."
             />

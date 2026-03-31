@@ -20,7 +20,7 @@ export default function MinhaContaSuccessPage() {
         <AuthGuard>
             <div className="bg-white font-sans">
                 <Header />
-                <BannerNews />
+                <BannerNews sectionName="HOME" categoryName="MINHA CONTA" />
                 <SuccessView
                     topText="A SUA CONTA FOI"
                     bottomText="ATUALIZADA COM SUCESSO!"

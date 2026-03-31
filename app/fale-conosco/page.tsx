@@ -73,7 +73,7 @@ export default function FaleConoscoPage() {
     return (
         <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`}>
             <Header />
-            <BannerNews title="FALE CONOSCO" subtitle="" />
+            <BannerNews sectionName="HOME" categoryName="FALE CONOSCO" title="FALE CONOSCO" subtitle="MANDE SUA MENSAGEM PARA NOSSO TIME" />
 
             <main className="flex-1 w-full bg-white">
                 <div className="w-full max-w-[1100px] mx-auto px-6 py-8 md:py-12">

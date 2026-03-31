@@ -234,7 +234,7 @@ export default function MinhaContaPage() {
                 suppressHydrationWarning
             >
                 <Header />
-                <BannerNews />
+                <BannerNews sectionName="HOME" categoryName="MINHA CONTA" />
 
                 <main className="flex-1 bg-white">
                     {!isMounted || isLoading ? (

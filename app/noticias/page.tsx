@@ -17,6 +17,8 @@ export default function NoticiasPage() {
         <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`}>
             <Header />
             <BannerNews
+                sectionName="NOTÍCIAS"
+                categoryName="GERAL"
                 title="NOTÍCIAS"
                 subtitle="FIQUE POR DENTRO DO QUE INTERESSA"
                 backgroundImage="/images/banner1.png"

@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 interface BannerProps {
     title?: string;
     subtitle?: string;
+    sectionName?: string;
+    categoryName?: string;
     isMounted?: boolean;
     backgroundImage?: string;
 }
@@ -15,6 +17,8 @@ interface BannerProps {
 export default function BannerNews({
     title = "MINHA CONTA",
     subtitle = "Consulte e edite os seus dados se for necessário.",
+    sectionName,
+    categoryName,
     backgroundImage,
 }: BannerProps) {
     const [mounted, setMounted] = useState(false);
@@ -32,9 +36,9 @@ export default function BannerNews({
         <div className="relative bg-white">
             {/* Unified Background Section */}
             <div className="bg-[#f2f2f2] w-full border-b border-gray-100">
-                <div className="max-w-[1070px] mx-auto">
+                <div className="max-w-[1100px] mx-auto px-6">
                     {/* Nav Row */}
-                    <div className="h-[38px] flex items-center justify-end gap-10 px-6">
+                    <div className="h-[38px] flex items-center justify-end gap-10">
                         {/* Navigation */}
                         <nav>
                             <ul className={`flex items-center gap-6 text-[11px] font-bold text-[#004415] ${acuminProBold.className}`}>
@@ -129,7 +133,7 @@ export default function BannerNews({
                     </div>
 
                     {/* Banner Section */}
-                    <section className={`relative overflow-hidden ${backgroundImage ? 'h-[130px] md:h-[180px]' : 'bg-[#f2f2f2] pb-5'}`}>
+                    <section className={`relative overflow-hidden ${backgroundImage ? 'h-[130px] md:h-[180px]' : 'bg-[#f2f2f2] pb-10 pt-4'}`}>
                         {backgroundImage && (
                             <div className="absolute inset-0 z-0">
                                 <Image
@@ -143,12 +147,12 @@ export default function BannerNews({
                                 <div className="absolute inset-0 bg-black/10"></div>
                             </div>
                         )}
-                        <div className={`relative z-10 px-12 md:px-16 h-full flex flex-col justify-center ${backgroundImage ? '' : 'text-left'}`}>
-                            <h1 className={`text-[40px] md:text-[56px] mb-0 uppercase leading-[0.85] tracking-tighter ${acuminProBold.className} ${backgroundImage ? 'text-white' : 'text-[#004415]'}`}>
+                        <div className={`relative z-10 h-full flex flex-col justify-center ${backgroundImage ? 'px-12 md:px-16' : 'text-left'}`}>
+                            <h1 className={`text-[32px] md:text-[34px] mb-0 uppercase italic leading-none tracking-tighter ${acuminCondBlackItalic.className} ${backgroundImage ? 'text-white' : 'text-[#004415]'}`}>
                                 {title}
                             </h1>
                             {subtitle && (
-                                <p className={`text-[12px] md:text-[14px] font-bold mt-1 inline-block ${acuminProBold.className} ${backgroundImage ? 'text-white' : 'text-[#004415]'}`}>
+                                <p className={`text-[12px] md:text-[13px] font-medium mt-2 inline-block ${acuminProRegular.className} ${backgroundImage ? 'text-white' : 'text-[#004415]'}`}>
                                     {subtitle}
                                 </p>
                             )}

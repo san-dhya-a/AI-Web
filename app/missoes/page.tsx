@@ -15,6 +15,8 @@ export default function MissoesPage() {
             <div className="min-h-screen flex flex-col bg-white">
                 <Header />
                 <BannerNews 
+                    sectionName="MISSÕES"
+                    categoryName="GERAL"
                     title="MISSÕES" 
                     subtitle="PARTICIPE E GANHE PONTOS EXTRAS!" 
                     backgroundImage="/images/missoesbanner.png"
