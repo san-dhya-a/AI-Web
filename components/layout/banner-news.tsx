@@ -12,6 +12,7 @@ interface BannerProps {
     categoryName?: string;
     isMounted?: boolean;
     backgroundImage?: string;
+    variant?: "standard" | "vibrant";
 }
 
 export default function BannerNews({
@@ -20,6 +21,7 @@ export default function BannerNews({
     sectionName,
     categoryName,
     backgroundImage,
+    variant = "standard",
 }: BannerProps) {
     const [mounted, setMounted] = useState(false);
 
@@ -133,7 +135,7 @@ export default function BannerNews({
                     </div>
 
                     {/* Banner Section */}
-                    <section className={`relative overflow-hidden ${backgroundImage ? 'h-[130px] md:h-[180px]' : 'bg-[#f2f2f2] pb-10 pt-4'}`}>
+                    <section className={`relative overflow-hidden ${backgroundImage ? 'h-[180px]' : 'bg-[#f2f2f2] pb-10 pt-4'}`}>
                         {backgroundImage && (
                             <div className="absolute inset-0 z-0">
                                 <Image
@@ -143,16 +145,19 @@ export default function BannerNews({
                                     className="object-cover"
                                     priority
                                 />
-                                <div className="absolute inset-0 bg-[#004415]/60 mix-blend-multiply"></div> 
-                                <div className="absolute inset-0 bg-black/10"></div>
+                                {variant === "vibrant" ? (
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#00843d] via-[#00843d]/90 to-[#00843d]/40"></div> 
+                                ) : (
+                                    <div className="absolute inset-0 bg-[#004415]/70"></div> 
+                                )}
                             </div>
                         )}
-                        <div className={`relative z-10 h-full flex flex-col justify-center ${backgroundImage ? 'px-12 md:px-16' : 'text-left'}`}>
-                            <h1 className={`text-[32px] md:text-[34px] mb-0 uppercase italic leading-none tracking-tighter ${acuminCondBlackItalic.className} ${backgroundImage ? 'text-white' : 'text-[#004415]'}`}>
+                        <div className={`relative z-10 h-full flex flex-col justify-center text-left ${variant === "vibrant" ? "px-8 md:px-14" : ""}`}>
+                            <h1 className={`uppercase italic leading-[0.85] tracking-tighter ${acuminCondBlackItalic.className} ${backgroundImage ? 'text-white' : 'text-[#004415]'} ${variant === "vibrant" ? "text-[38px] md:text-[46px]" : "text-[32px] md:text-[36px]"}`}>
                                 {title}
                             </h1>
                             {subtitle && (
-                                <p className={`text-[12px] md:text-[13px] font-medium mt-2 inline-block ${acuminProRegular.className} ${backgroundImage ? 'text-white' : 'text-[#004415]'}`}>
+                                <p className={`text-[12px] md:text-[13px] font-bold ${variant === "vibrant" ? "italic" : ""} mt-2.5 ${acuminProBold.className} ${backgroundImage ? 'text-white' : 'text-[#004415]'}`}>
                                     {subtitle}
                                 </p>
                             )}

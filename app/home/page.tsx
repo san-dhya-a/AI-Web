@@ -21,8 +21,8 @@ export default function HomePage() {
             <div className={`bg-white min-h-screen flex flex-col ${acuminProRegular.className}`} suppressHydrationWarning>
                 <Header />
                 <BannerNews 
-                    title="Bem-vindo" 
-                    subtitle="Esta é a sua página inicial temporária. Você está logado com sucesso." 
+                    title="BEM-VINDO" 
+                    subtitle="Esta é a sua área restrita. Em breve, novos conteúdos estarão disponíveis aqui." 
                 />
 
                 <main className="flex-1 bg-white">
